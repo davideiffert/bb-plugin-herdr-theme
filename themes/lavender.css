@@ -1,0 +1,197 @@
+/* Herdr Lavender
+   A BB color theme: nearly black purple surfaces, lavender accent, thin
+   separators, compact monospace, pastel status colors.
+
+   Inspiration: Herdr's dark workspace (nearly black purple panes, lavender
+   active tab and pane outline, flat prompt) and the Catppuccin Mocha and
+   Latte palettes. The palette adapts that inspiration for BB.
+   Dark is the primary appearance, light is a deliberate paper
+   variant, not an inversion.
+
+   Palette-only. Two top-level blocks, custom properties only. Element-scoped
+   rules belong to the plugin's integration layer, not this file.
+   Token names and derivation rules follow bb-app 0.43 base CSS.
+   Font: "Herdr Mono" is bundled by the plugin; the rest of the stack is
+   local fallback. No network fonts. */
+
+:root,
+.light {
+  --herdr-theme-enabled: 1;
+  --herdr-theme-id: lavender;
+
+  /* Type. Declared once here; .dark inherits. Mono for UI and code alike. */
+  --font-sans: "Herdr Mono", "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+  --font-mono: "Herdr Mono", "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+  --radius: 0.3rem;
+
+  /* Anchors: lavender-tinted paper and violet-grey ink */
+  --canvas: #f7f5fc;
+  --ink: #2f2c48;
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--canvas);
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
+
+  /* Accent: deep lavender for links, focus, selection */
+  --primary: #6b4fcb;
+  --primary-foreground: #ffffff;
+  --ring: var(--primary);
+  --timeline-accent: #3a68c4;
+  --file-accent: #1a7690;
+
+  /* Text tiers: body 12, secondary 7, readback 6, subtle 5 (on canvas) */
+  --muted-foreground: #55517a;
+  --readback-foreground: #625e86;
+  --subtle-foreground: #6b678e;
+  --sidebar-foreground: var(--ink);
+  --sidebar-accent-foreground: var(--ink);
+  --secondary-foreground: var(--ink);
+  --accent-foreground: var(--ink);
+
+  /* Surfaces: sidebar and recessed panels one step off the paper */
+  --sidebar: #efecf8;
+  --secondary: #ebe7f6;
+  --accent: #ebe7f6;
+  --muted: #e4dff2;
+  --surface-recessed: color-mix(in oklab, var(--ink) 5%, transparent);
+  --surface-recessed-solid: #efecf8;
+  --surface-recessed-soft-solid: #f2f0f9;
+  --surface-raised: color-mix(in oklab, var(--ink) 2.5%, transparent);
+  --surface-raised-solid: #f3f0fa;
+  --surface-scrim: color-mix(in oklab, var(--canvas) 90%, transparent);
+
+  /* State washes: hover is ink, active and selected are lavender */
+  --state-hover: color-mix(in oklab, var(--ink) 6%, transparent);
+  --state-active: color-mix(in oklab, var(--primary) 12%, transparent);
+  --sidebar-accent: #e5e0f3;
+  --surface-selected: color-mix(in oklab, var(--primary) 12%, transparent);
+  --surface-selected-border: color-mix(in oklab, var(--primary) 40%, transparent);
+
+  /* Lines: thin, lavender-grey, never pure grey */
+  --border: #dcd8ea;
+  --border-hairline: #d5d0e6;
+  --border-seam: #e7e4f1;
+  --border-seam-vertical: var(--border-seam);
+  --sidebar-border: #d9d4e9;
+  --input: #b7b1d0;
+
+  /* Status: rose, gold, peach, green, violet. Darker for paper. */
+  --destructive: #b33351;
+  --destructive-foreground: #ffffff;
+  --destructive-text: #98263f;
+  --warning: #c48a1a;
+  --warning-text: #8b5f0a;
+  --attention: #974015;
+  --success: #286a2c;
+  --diff-added: #2c7a31;
+  --diff-removed: #b8354f;
+  --pr-merged: #743bab;
+
+  /* Terminal: saturated ink-weight colors for paper, companion foregrounds */
+  --ansi-0:  #4a4666;  --ansi-bg-fg-0:  #f7f5fc;
+  --ansi-1:  #c43f5d;  --ansi-bg-fg-1:  #ffffff;
+  --ansi-2:  #34813a;  --ansi-bg-fg-2:  #ffffff;
+  --ansi-3:  #9a680a;  --ansi-bg-fg-3:  #ffffff;
+  --ansi-4:  #3a68c4;  --ansi-bg-fg-4:  #ffffff;
+  --ansi-5:  #a352c4;  --ansi-bg-fg-5:  #ffffff;
+  --ansi-6:  #1a7690;  --ansi-bg-fg-6:  #ffffff;
+  --ansi-7:  #83809f;  --ansi-bg-fg-7:  #1a1826;
+  --ansi-8:  #6c6889;  --ansi-bg-fg-8:  #ffffff;
+  --ansi-9:  #cf4e6c;  --ansi-bg-fg-9:  #000000;
+  --ansi-10: #3f8f3e;  --ansi-bg-fg-10: #000000;
+  --ansi-11: #ad7810;  --ansi-bg-fg-11: #1a1826;
+  --ansi-12: #3f72cc;  --ansi-bg-fg-12: #ffffff;
+  --ansi-13: #a95cc9;  --ansi-bg-fg-13: #000000;
+  --ansi-14: #227f9a;  --ansi-bg-fg-14: #ffffff;
+  --ansi-15: #cfcbe0;  --ansi-bg-fg-15: #1a1826;
+}
+
+.dark {
+  --herdr-theme-enabled: 1;
+  --herdr-theme-id: lavender;
+
+  /* Anchors: nearly black purple canvas, lavender-grey ink (about 11:1) */
+  --canvas: #14121f;
+  --ink: #cfcbe3;
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--canvas);
+  --card-foreground: var(--ink);
+  --popover: #1c1a2c;
+  --popover-foreground: var(--ink);
+
+  /* Accent: pastel lavender. Dark text on it, never white. */
+  --primary: #bda9f2;
+  --primary-foreground: #14121f;
+  --ring: var(--primary);
+  --timeline-accent: #8fb3f0;
+  --file-accent: #86cfe2;
+
+  /* Text tiers: body 11, secondary 7, readback 5.6, subtle 4.6 (on canvas) */
+  --muted-foreground: #a6a2c0;
+  --readback-foreground: #9591b0;
+  --subtle-foreground: #8884a4;
+  --sidebar-foreground: var(--ink);
+  --sidebar-accent-foreground: var(--ink);
+  --secondary-foreground: var(--ink);
+  --accent-foreground: var(--ink);
+
+  /* Surfaces: sidebar and popovers sit one step lighter than the canvas */
+  --sidebar: #1a1829;
+  --secondary: #211e33;
+  --accent: #211e33;
+  --muted: #282442;
+  --surface-recessed: color-mix(in oklab, var(--ink) 5%, transparent);
+  --surface-recessed-solid: #1a1829;
+  --surface-recessed-soft-solid: #181626;
+  --surface-raised: color-mix(in oklab, var(--ink) 3%, transparent);
+  --surface-raised-solid: #191727;
+  --surface-scrim: color-mix(in oklab, var(--canvas) 90%, transparent);
+
+  /* State washes: hover is ink, active and selected are lavender */
+  --state-hover: color-mix(in oklab, var(--ink) 8%, transparent);
+  --state-active: color-mix(in oklab, var(--primary) 14%, transparent);
+  --sidebar-accent: #232037;
+  --surface-selected: color-mix(in oklab, var(--primary) 14%, transparent);
+  --surface-selected-border: color-mix(in oklab, var(--primary) 45%, transparent);
+
+  /* Lines: thin, one step above the surface they cut, purple-tinted */
+  --border: #2a2740;
+  --border-hairline: #2e2b46;
+  --border-seam: #211e33;
+  --border-seam-vertical: var(--border-seam);
+  --sidebar-border: #262339;
+  --input: #3d3958;
+
+  /* Status: pastel rose, gold, peach, green, violet. All 7+ on canvas. */
+  --destructive: #ef8fa5;
+  --destructive-foreground: #14121f;
+  --destructive-text: #f19fb2;
+  --warning: #e6c47a;
+  --warning-text: #e6c47a;
+  --attention: #f0a882;
+  --success: #a5dd98;
+  --diff-added: #a5dd98;
+  --diff-removed: #ef8fa5;
+  --pr-merged: #d6a4ea;
+
+  /* Terminal: pastel 16, normal slightly deeper than bright, dark companions */
+  --ansi-0:  #3a3752;  --ansi-bg-fg-0:  #cfcbe3;
+  --ansi-1:  #ef8fa5;  --ansi-bg-fg-1:  #14121f;
+  --ansi-2:  #a5dd98;  --ansi-bg-fg-2:  #14121f;
+  --ansi-3:  #e6c47a;  --ansi-bg-fg-3:  #14121f;
+  --ansi-4:  #8fb3f0;  --ansi-bg-fg-4:  #14121f;
+  --ansi-5:  #d6a4ea;  --ansi-bg-fg-5:  #14121f;
+  --ansi-6:  #86cfe2;  --ansi-bg-fg-6:  #14121f;
+  --ansi-7:  #b9b5d2;  --ansi-bg-fg-7:  #14121f;
+  --ansi-8:  #5c5878;  --ansi-bg-fg-8:  #e6e3f4;
+  --ansi-9:  #f5a2b5;  --ansi-bg-fg-9:  #14121f;
+  --ansi-10: #a9dd9d;  --ansi-bg-fg-10: #14121f;
+  --ansi-11: #ebcd8a;  --ansi-bg-fg-11: #14121f;
+  --ansi-12: #a7c5f5;  --ansi-bg-fg-12: #14121f;
+  --ansi-13: #e3b8f2;  --ansi-bg-fg-13: #14121f;
+  --ansi-14: #98d7e6;  --ansi-bg-fg-14: #14121f;
+  --ansi-15: #d3d0e6;  --ansi-bg-fg-15: #14121f;
+}

@@ -1,0 +1,233 @@
+[
+  {
+    "id": "lavender",
+    "name": "Lavender",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#f7f5fc",
+        "#efecf8",
+        "#6b4fcb",
+        "#286a2c",
+        "#974015"
+      ],
+      "dark": [
+        "#14121f",
+        "#1a1829",
+        "#bda9f2",
+        "#a5dd98",
+        "#f0a882"
+      ]
+    }
+  },
+  {
+    "id": "catppuccin",
+    "name": "Catppuccin",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#eff1f5",
+        "#e9ebf0",
+        "#1954c9",
+        "#2a6a1c",
+        "#9d3e07"
+      ],
+      "dark": [
+        "#181825",
+        "#1e1f2c",
+        "#89b4fa",
+        "#a6e3a1",
+        "#fab387"
+      ]
+    }
+  },
+  {
+    "id": "tokyo-night",
+    "name": "Tokyo Night",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#e1e2e7",
+        "#dbdde6",
+        "#1f549c",
+        "#455b2c",
+        "#834400"
+      ],
+      "dark": [
+        "#1a1b26",
+        "#20212d",
+        "#7aa2f7",
+        "#9ece6a",
+        "#ff9e64"
+      ]
+    }
+  },
+  {
+    "id": "dracula",
+    "name": "Dracula",
+    "adaptedLight": true,
+    "swatches": {
+      "light": [
+        "#fffafd",
+        "#f7f2f6",
+        "#6e5590",
+        "#247037",
+        "#7d5a35"
+      ],
+      "dark": [
+        "#282a36",
+        "#2f313d",
+        "#c097f9",
+        "#50fa7b",
+        "#ffb86c"
+      ]
+    }
+  },
+  {
+    "id": "nord",
+    "name": "Nord",
+    "adaptedLight": true,
+    "swatches": {
+      "light": [
+        "#fcfafc",
+        "#f4f3f5",
+        "#48666e",
+        "#56654a",
+        "#855648"
+      ],
+      "dark": [
+        "#2e3440",
+        "#353b46",
+        "#88c0d0",
+        "#a3be8c",
+        "#deaa99"
+      ]
+    }
+  },
+  {
+    "id": "gruvbox",
+    "name": "Gruvbox",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#fbf1c7",
+        "#f4ebc2",
+        "#076678",
+        "#635f0b",
+        "#a63703"
+      ],
+      "dark": [
+        "#282828",
+        "#2f2e2d",
+        "#d79a23",
+        "#b8bb26",
+        "#fe8420"
+      ]
+    }
+  },
+  {
+    "id": "one",
+    "name": "One",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#fafafa",
+        "#f3f3f4",
+        "#315cba",
+        "#366d36",
+        "#835901"
+      ],
+      "dark": [
+        "#282c34",
+        "#2d3139",
+        "#61afef",
+        "#98c379",
+        "#d39e6c"
+      ]
+    }
+  },
+  {
+    "id": "solarized",
+    "name": "Solarized",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#fdf6e3",
+        "#f8f2e0",
+        "#1c6599",
+        "#596700",
+        "#a83e12"
+      ],
+      "dark": [
+        "#002b36",
+        "#052f3a",
+        "#5ea9de",
+        "#9aaa2b",
+        "#de8e6c"
+      ]
+    }
+  },
+  {
+    "id": "kanagawa",
+    "name": "Kanagawa",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#f2ecbc",
+        "#ece7b9",
+        "#425a85",
+        "#4d5f36",
+        "#894900"
+      ],
+      "dark": [
+        "#1f1f28",
+        "#26252d",
+        "#7e9cd8",
+        "#8ba480",
+        "#ffa066"
+      ]
+    }
+  },
+  {
+    "id": "rose-pine",
+    "name": "Ros\u00e9 Pine",
+    "adaptedLight": false,
+    "swatches": {
+      "light": [
+        "#faf4ed",
+        "#f4eee8",
+        "#69597b",
+        "#27667f",
+        "#85514e"
+      ],
+      "dark": [
+        "#191724",
+        "#201e2b",
+        "#c4a7e7",
+        "#6f9eb1",
+        "#ea9a97"
+      ]
+    }
+  },
+  {
+    "id": "vesper",
+    "name": "Vesper",
+    "adaptedLight": true,
+    "swatches": {
+      "light": [
+        "#fffdfc",
+        "#f7f5f4",
+        "#785e48",
+        "#406b60",
+        "#785e48"
+      ],
+      "dark": [
+        "#1a1a1a",
+        "#222222",
+        "#ffc799",
+        "#99ffe4",
+        "#ffc799"
+      ]
+    }
+  }
+]

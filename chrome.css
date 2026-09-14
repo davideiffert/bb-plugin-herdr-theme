@@ -1,0 +1,131 @@
+/* Bounded to native BB prompts and pane tabs. The content script removes
+   data-herdr-theme on theme switch, reload, and plugin disposal. */
+:root[data-herdr-theme] [data-promptbox] {
+  border-radius: 0;
+  border-width: 1px 0;
+  border-color: var(--border);
+  background: var(--canvas);
+  box-shadow: none;
+}
+:root[data-herdr-theme] [data-promptbox]:focus-within {
+  border-top-color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+:root[data-herdr-theme] [data-promptbox-input-region]::before {
+  content: "❯" / "";
+  position: absolute;
+  top: 0.8rem;
+  left: 0.6rem;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  line-height: 1.5;
+  pointer-events: none;
+}
+:root[data-herdr-theme] [data-promptbox-editor-content] .tiptap {
+  padding-left: 1.9rem;
+}
+/* Phone editors without an input-edge control need only the normal gutter. */
+@media (max-width:767px) and (pointer:coarse) {
+  :root[data-herdr-theme] [data-promptbox]:not([data-promptbox-compact]):not([data-promptbox-voice-active]):not(:has([data-promptbox-input-region] button)) [data-promptbox-editor-scroll] {
+    padding-right:1rem;
+  }
+}
+/* Placeholder text does not contribute to the editor's measured height.
+   Keep the empty hint on one line without constraining actual input. */
+:root[data-herdr-theme] [data-promptbox]:not([data-promptbox-compact]) [data-promptbox-editor-content] .tiptap p.is-editor-empty:first-child {
+  position: relative;
+}
+:root[data-herdr-theme] [data-promptbox]:not([data-promptbox-compact]) [data-promptbox-editor-content] .tiptap p.is-editor-empty:first-child::before {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: auto;
+  float: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+:root[data-herdr-theme] [data-promptbox]:not([data-promptbox-compact]) [data-promptbox-action-row] {
+  border-top: 1px solid var(--border-seam);
+  margin-inline: 0.5rem;
+  padding-left: 0.4rem;
+  padding-right: 0.25rem;
+}
+/* Compact and voice modes keep their existing layout and touch targets. */
+:root[data-herdr-theme] [data-promptbox-compact] [data-promptbox-input-region]::before {
+  top: 50%;
+  transform: translateY(-50%);
+}
+:root[data-herdr-theme] [data-promptbox-voice-active] [data-promptbox-input-region]::before {
+  content: none;
+}
+:root[data-herdr-theme] [data-promptbox-submit-action] {
+  border-radius: 3px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+/* TabPill is shared across BB's native pane tab strips. */
+:root[data-herdr-theme] .group\/tab-pill,
+:root[data-herdr-theme] .group\/tab-pill > button {
+  border-radius: 2px;
+}
+:root[data-herdr-theme] .group\/tab-pill:has(> button[aria-pressed="true"]) {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+:root[data-herdr-theme] .group\/tab-pill:has(> button[aria-pressed="true"]) button {
+  color: inherit;
+}
+:root[data-herdr-theme] [data-split-pane-id] {
+  outline: 1px solid var(--border-seam);
+  outline-offset: -1px;
+}
+:root[data-herdr-theme] [data-split-pane-id][data-focused="true"] {
+  outline-color: var(--primary);
+}
+:root[data-herdr-theme] [data-sidebar-split-tab-group] {
+  border-bottom: 1px solid var(--border-seam);
+}
+@media (forced-colors: active) {
+  :root[data-herdr-theme] [data-promptbox]:focus-within,
+  :root[data-herdr-theme] [data-split-pane-id][data-focused="true"] {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+}
+
+/* Desktop terminal readout: one rule beneath the input, then two compact
+   control lines. Keep the form, native controls, and keyboard order intact.
+   Touch layouts, collapsed and voice composers stay native. */
+@media (min-width:768px) and (not (pointer:coarse)) {
+  :root[data-herdr-theme] [data-follow-up-composer-expanded]:has([data-follow-up-composer-footer]) [data-promptbox]:not([data-promptbox-compact]):not([data-promptbox-voice-active]) {
+    border-bottom:0;
+  }
+  :root[data-herdr-theme] [data-follow-up-composer-expanded] [data-promptbox]:not([data-promptbox-compact]):not([data-promptbox-voice-active]) [data-promptbox-action-row] {
+    border-top:1px solid var(--primary);
+    margin-inline:0;
+    padding:2px 0.5rem;
+    gap:0.5rem;
+  }
+  :root[data-herdr-theme] [data-follow-up-composer-expanded]:has([data-promptbox]:not([data-promptbox-compact]):not([data-promptbox-voice-active])) [data-follow-up-composer-footer] {
+    margin-top:0;
+    padding-inline:0.5rem;
+    min-height:28px;
+    max-height:none;
+    border-bottom:1px solid var(--border);
+    border-radius:0;
+  }
+  :root[data-herdr-theme] [data-follow-up-composer-footer] [data-option-display] { border-radius:0; }
+}
+@container thread-pane (min-width: 48rem) {
+  @media (min-width:768px) and (not (pointer:coarse)) {
+    /* Let the model read like a terminal's right-hand status field. */
+    :root[data-herdr-theme] [data-follow-up-composer-expanded] [data-promptbox]:not([data-promptbox-compact]):not([data-promptbox-voice-active]) [data-promptbox-action-row] > [data-promptbox-standard-actions]:first-child {
+      justify-content:flex-end;
+    }
+    :root[data-herdr-theme] [data-follow-up-composer-expanded] [data-promptbox]:not([data-promptbox-compact]):not([data-promptbox-voice-active]) [data-promptbox-action-row] [aria-label="Prompt actions"] {
+      margin-right:auto;
+    }
+  }
+}

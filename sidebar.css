@@ -1,0 +1,210 @@
+/* Stock BB sidebar only. Keep row geometry, tree nesting, hit targets, and
+   status semantics native. Folders does not use these thread/project hooks. */
+:root[data-herdr-theme] [data-sidebar-project-id] [data-sidebar-sticky-tier="label"],
+:root[data-herdr-theme] .group\/sidebar-section > [data-sidebar-sticky-tier="label"]:has([title="Pinned"]) {
+  border-radius: 0;
+  background: var(--sidebar);
+  box-shadow: none;
+  color: var(--muted-foreground);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+/* Separate the pinned collection with space, using the same heading style. */
+:root[data-herdr-theme] .group\/sidebar-section:has(> [data-sidebar-sticky-tier="label"] [title="Pinned"]) {
+  padding-bottom: 0.5rem;
+}
+:root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]),
+:root[data-herdr-theme] [data-sidebar-thread-id] {
+  border-radius: 0;
+}
+:root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]) :is(.bb-thread-title, .bb-sidebar-thread-title) {
+  font-weight: 400;
+}
+:root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id][aria-current="page"]) {
+  background: color-mix(in oklab, var(--primary) 16%, var(--sidebar));
+  color: var(--sidebar-foreground);
+  box-shadow: none;
+}
+:root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id][aria-current="page"]) :is(.bb-thread-title, .bb-sidebar-thread-title) {
+  font-weight: 500;
+}
+/* Preserve native status icons and accessible labels. Only strengthen the
+   existing working indicator; unread dots never become invented job states. */
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] [aria-label="Thread working"] {
+  color: var(--attention);
+}
+@media (forced-colors: active) {
+  :root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id][aria-current="page"]) {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+}
+
+/* Keep work first and commands at the foot of the sidebar. */
+:root[data-herdr-theme] [data-testid="sidebar-navigation-region"]:has(.herdr-commands) { order: 2; flex-shrink: 0; position:relative; z-index:60; }
+:root[data-herdr-theme] [data-sidebar="footer"] { order: 3; }
+:root[data-herdr-theme] [data-testid="app-sidebar-navigation-divider"] { display: none; }
+:root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p) > svg { display: none; }
+:root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p)::before { content: "·" / ""; color: var(--subtle-foreground); }
+:root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p) > p { text-transform: lowercase; color: var(--subtle-foreground); }
+.herdr-commands { display:flex; align-items:center; gap:4px; padding:8px; border-top:1px solid var(--border-seam); font-size:12px; }
+.herdr-commands button, .herdr-commands summary { cursor:pointer; padding:6px; min-height:32px; text-align:left; color:var(--muted-foreground); }
+.herdr-commands button:hover, .herdr-commands summary:hover, .herdr-commands button[aria-pressed="true"] { background:var(--state-hover); color:var(--foreground); }
+.herdr-commands button:focus-visible, .herdr-commands summary:focus-visible { outline:2px solid var(--ring); }
+.herdr-commands button:disabled { opacity:.5; cursor:default; }
+.herdr-commands details { margin-left:auto; position:relative; }
+.herdr-commands summary { list-style:none; }
+.herdr-commands summary::-webkit-details-marker { display:none; }
+.herdr-command-menu { position:absolute; bottom:100%; right:0; z-index:60; width:210px; max-height:60dvh; overflow:auto; padding:4px; background:var(--popover); border:1px solid var(--border); box-shadow:0 4px 16px #0003; }
+.herdr-command-menu button { display:block; width:100%; }
+@media (pointer:coarse) { .herdr-commands button, .herdr-commands summary { min-height:44px; } }
+/* Native child-thread guide spans are decorative; indentation remains. */
+:root[data-herdr-theme] [data-sidebar-project-id] span[aria-hidden="true"].w-px.bg-border-hairline { display:none; }
+
+/* Herdr uses lowercase command labels; work names keep their own casing. */
+.herdr-commands button, .herdr-commands summary { text-transform:lowercase; }
+
+/* Expose BB's real expand/collapse controls as tree markers. */
+:root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]) button:is([aria-label^="Collapse "], [aria-label^="Expand "]) {
+  order:-1;
+  opacity:1;
+  pointer-events:auto;
+}
+/* One terminal line per desktop entry, including BB's fixed-height child rows. */
+@media (min-width:768px) and (not (pointer:coarse)) {
+  :root[data-herdr-theme] [data-sidebar="content"]:has([data-sidebar-thread-id]) { --bb-sidebar-row-height:24px; }
+  :root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]) { height:24px; margin-block:0; }
+  :root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]) button { max-height:24px; }
+  :root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]) :is(.bb-thread-title, .bb-sidebar-thread-title) { line-height:20px; }
+  :root[data-herdr-theme] [data-sidebar-project-id] .space-y-px > *,
+  :root[data-herdr-theme] [data-sidebar-project-id] .space-y-0\.5 > * { margin-block:0; }
+  :root[data-herdr-theme] [data-sidebar-sticky-project-item] { margin-block:0 8px; }
+}
+/* Leaf dots share the same gutter as real parent expand controls. */
+:root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]):not(:has(button:is([aria-label^="Collapse "], [aria-label^="Expand "]))) > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title))::before {
+  content:"·" / "";
+  width:20px;
+  flex-shrink:0;
+  text-align:center;
+  color:var(--subtle-foreground);
+}
+/* Menu also reveals BB's original utility controls, preserving their actions. */
+:root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands) > [data-sidebar="footer"] { display:none; }
+:root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands details[open]) > [data-sidebar="footer"],
+:root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands) > [data-sidebar="footer"]:focus-within { display:flex; }
+
+/* Continuous tree strokes grow with native rows, including branch details.
+   The arm meets the title; the last child's vertical stops at that arm. */
+/* Decorative title wrappers pass clicks through to BB's native row link.
+   Expand buttons explicitly retain pointer events in the rule above. */
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title)),
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > [data-sidebar-sticky-group] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title)) {
+  position:relative;
+  pointer-events:none;
+  align-self:stretch;
+  --herdr-tree-arm-offset:0px;
+}
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title)[data-herdr-branch]),
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > [data-sidebar-sticky-group] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title)[data-herdr-branch]) {
+  --herdr-tree-arm-offset:-9px;
+}
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title))::before,
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > [data-sidebar-sticky-group] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title))::before {
+  content:"";
+  order:-2;
+  width:15px;
+  margin-left:5px;
+  flex-shrink:0;
+  align-self:stretch;
+  border-left:1px solid var(--subtle-foreground);
+  pointer-events:none;
+}
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title))::after,
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item] > [data-sidebar-sticky-group] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title))::after {
+  content:"";
+  position:absolute;
+  left:5px;
+  top:calc(50% + var(--herdr-tree-arm-offset));
+  width:12px;
+  border-top:1px solid var(--subtle-foreground);
+  pointer-events:none;
+}
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item]:last-child > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title))::before,
+:root[data-herdr-theme] [data-sidebar-project-id] .relative.space-y-px:has(> span.w-px.bg-border-hairline) > [data-sidebar-windowed-item]:last-child > [data-sidebar-sticky-group] > .group\/thread-row > span:has(:is(.bb-thread-title, .bb-sidebar-thread-title))::before {
+  clip-path:inset(0 0 calc(50% - var(--herdr-tree-arm-offset)) 0);
+}
+
+/* Native status labels are the source of truth. Keep them accessible while
+   rendering activity as dots, waiting as rings, and failures as diamonds. */
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] :is(
+  [aria-label="Thread working"], [aria-label="Workflow running"],
+  [aria-label="Background agent running"], [aria-label="Background command running"],
+  [aria-label="Plan mode active"], [aria-label="Goal active"],
+  [aria-label="Thread needs user input"], [aria-label="Thread has a message waiting to send"],
+  [aria-label="Unread thread failed"], [aria-label="Queued message failed to send"]
+) {
+  color: var(--success);
+  background: radial-gradient(circle, currentColor 0 3.5px, transparent 4px);
+  animation: none;
+}
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] :is(
+  [aria-label="Thread working"], [aria-label="Workflow running"],
+  [aria-label="Background agent running"], [aria-label="Background command running"],
+  [aria-label="Plan mode active"], [aria-label="Goal active"],
+  [aria-label="Thread needs user input"], [aria-label="Thread has a message waiting to send"],
+  [aria-label="Unread thread failed"], [aria-label="Queued message failed to send"]
+) > * { visibility: hidden; }
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] :is(
+  [aria-label="Thread needs user input"], [aria-label="Thread has a message waiting to send"]
+) {
+  color: var(--attention);
+  background: radial-gradient(circle, transparent 0 2px, currentColor 2.5px 4px, transparent 4.5px);
+}
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] [aria-label="Thread has a message waiting to send"] { color:var(--subtle-foreground); }
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] :is(
+  [aria-label="Unread thread failed"], [aria-label="Queued message failed to send"]
+) {
+  color: var(--destructive-text);
+  background: linear-gradient(currentColor, currentColor) center / 7px 7px no-repeat;
+  transform: rotate(45deg);
+}
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] [aria-label="Unread thread succeeded"] { background:var(--file-accent); }
+/* A draft is not an activity state. Preserve its pencil, including the native
+   combined working/draft signal, whose color indicates work is still running. */
+:root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] [aria-label="Thread working with unsubmitted draft"] { color:var(--success); }
+@media (forced-colors: active) {
+  :root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] svg[aria-label] { background:none; transform:none; }
+  :root[data-herdr-theme] [data-sidebar-thread-trailing-indicator] svg[aria-label] > * { visibility:visible; }
+}
+
+/* Opt-in branch rows use BB's known environment branch, including main.
+   Only matching rows grow. Native windowing measures their actual height. */
+:root[data-herdr-theme] .group\/thread-row:has(:is(.bb-thread-title, .bb-sidebar-thread-title)[data-herdr-branch]) {
+  height:auto;
+  min-height:44px;
+}
+:root[data-herdr-theme] :is(.bb-thread-title, .bb-sidebar-thread-title)[data-herdr-branch] {
+  position:relative;
+  min-width:0;
+  max-width:100%;
+  padding-bottom:18px;
+  line-height:20px;
+}
+:root[data-herdr-theme] :is(.bb-thread-title, .bb-sidebar-thread-title)[data-herdr-branch]::after {
+  content:attr(data-herdr-branch);
+  position:absolute;
+  inset-inline:0;
+  bottom:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:0.85em;
+  font-weight:400;
+  line-height:18px;
+  color:var(--subtle-foreground);
+}
+
+/* The newer title wrapper contains raw text; retain its native truncation. */
+:root[data-herdr-theme] .bb-sidebar-thread-title[data-herdr-branch] {
+  display:block;
+}

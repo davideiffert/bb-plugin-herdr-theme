@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a visual or interaction problem in Herdr Theme.
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: BB and Herdr Theme versions
+      placeholder: BB 0.43, Herdr Theme 0.5.0
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and app or browser
+      placeholder: iPhone / BB app, macOS / BB app, Linux / Chrome
+    validations:
+      required: true
+  - type: input
+    id: appearance
+    attributes:
+      label: Palette, appearance, and other sidebar plugins
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: What happened and how to reproduce it
+      description: Include what you expected, and whether another BB theme has the same problem.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot or recording
+      description: Crop or hide private conversations and project names before attaching.

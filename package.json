@@ -1,0 +1,151 @@
+{
+  "name": "bb-plugin-herdr-theme",
+  "version": "0.5.0",
+  "type": "module",
+  "engines": {
+    "bb": ">=0.43",
+    "bbPluginSdk": ">=0.4.84"
+  },
+  "bb": {
+    "name": "Herdr Theme",
+    "description": "A terminal-inspired BB workspace with framed panes, a left-aligned transcript, and eleven light and dark color families.",
+    "branding": {
+      "icon": "./assets/icon.svg"
+    },
+    "server": "./server.ts",
+    "app": "./app.tsx",
+    "themes": [
+      {
+        "id": "lavender",
+        "name": "Herdr Lavender",
+        "description": "Ink-purple nights and warm paper days. Inspired by Herdr.",
+        "css": "./themes/lavender.css",
+        "codeTheme": {
+          "dark": "catppuccin-mocha",
+          "light": "catppuccin-latte"
+        }
+      },
+      {
+        "id": "catppuccin",
+        "name": "Herdr Catppuccin",
+        "description": "Catppuccin with Herdr terminal composition.",
+        "css": "./themes/catppuccin.css",
+        "codeTheme": {
+          "dark": "catppuccin-mocha",
+          "light": "catppuccin-latte"
+        }
+      },
+      {
+        "id": "tokyo-night",
+        "name": "Herdr Tokyo Night",
+        "description": "Tokyo Night with Herdr terminal composition.",
+        "css": "./themes/tokyo-night.css",
+        "codeTheme": {
+          "dark": "tokyo-night",
+          "light": "github-light"
+        }
+      },
+      {
+        "id": "dracula",
+        "name": "Herdr Dracula",
+        "description": "Dracula with Herdr terminal composition. Light is a BB adaptation.",
+        "css": "./themes/dracula.css",
+        "codeTheme": {
+          "dark": "dracula",
+          "light": "github-light"
+        }
+      },
+      {
+        "id": "nord",
+        "name": "Herdr Nord",
+        "description": "Nord with Herdr terminal composition. Light is a BB adaptation.",
+        "css": "./themes/nord.css",
+        "codeTheme": {
+          "dark": "nord",
+          "light": "github-light"
+        }
+      },
+      {
+        "id": "gruvbox",
+        "name": "Herdr Gruvbox",
+        "description": "Gruvbox with Herdr terminal composition.",
+        "css": "./themes/gruvbox.css",
+        "codeTheme": {
+          "dark": "gruvbox-dark-medium",
+          "light": "gruvbox-light-medium"
+        }
+      },
+      {
+        "id": "one",
+        "name": "Herdr One",
+        "description": "One with Herdr terminal composition.",
+        "css": "./themes/one.css",
+        "codeTheme": {
+          "dark": "one-dark-pro",
+          "light": "one-light"
+        }
+      },
+      {
+        "id": "solarized",
+        "name": "Herdr Solarized",
+        "description": "Solarized with Herdr terminal composition.",
+        "css": "./themes/solarized.css",
+        "codeTheme": {
+          "dark": "solarized-dark",
+          "light": "solarized-light"
+        }
+      },
+      {
+        "id": "kanagawa",
+        "name": "Herdr Kanagawa",
+        "description": "Kanagawa with Herdr terminal composition.",
+        "css": "./themes/kanagawa.css",
+        "codeTheme": {
+          "dark": "kanagawa-wave",
+          "light": "kanagawa-lotus"
+        }
+      },
+      {
+        "id": "rose-pine",
+        "name": "Herdr Ros\u00e9 Pine",
+        "description": "Ros\u00e9 Pine with Herdr terminal composition.",
+        "css": "./themes/rose-pine.css",
+        "codeTheme": {
+          "dark": "rose-pine",
+          "light": "rose-pine-dawn"
+        }
+      },
+      {
+        "id": "vesper",
+        "name": "Herdr Vesper",
+        "description": "Vesper with Herdr terminal composition. Light is a BB adaptation.",
+        "css": "./themes/vesper.css",
+        "codeTheme": {
+          "dark": "vesper",
+          "light": "github-light"
+        }
+      }
+    ],
+    "skills": []
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@get-bb/plugin-sdk": "0.4.84",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  },
+  "description": "A terminal-inspired BB workspace with framed panes, a left-aligned transcript, and eleven light and dark color families.",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/embed-font.mjs && bb plugin build",
+    "check": "tsc --noEmit",
+    "palettes": "python3 scripts/generate-palettes.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davideiffert/bb-plugin-herdr-theme.git"
+  },
+  "homepage": "https://github.com/davideiffert/bb-plugin-herdr-theme#readme"
+}

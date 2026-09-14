@@ -1,0 +1,344 @@
+/* Herdr Theme composition: terminal pane framing and a left-aligned transcript.
+   Scoped to :root[data-herdr-theme]. Loaded after chrome.css. Palette and font
+   stay in themes/lavender.css and font.css; this file only arranges what BB
+   already renders. Hooks were read from bb-app 0.43 source and verified in
+   the live DOM by the integration pass; see design/composition.md. */
+
+:root[data-herdr-theme] {
+  /* Marker gutter shared by the user chevron and the agent dot. */
+  --herdr-theme-marker-gutter: 1.6rem;
+  /* Gap between the pane frame and the pane edge, like Herdr's canvas gap. */
+  --herdr-theme-frame-inset: 0.5rem;
+  --herdr-theme-frame-line: var(--border);
+  --herdr-theme-frame-line-focus: color-mix(in oklab, var(--primary) 55%, var(--border));
+}
+
+/* ---------------------------------------------------------------------------
+   1. Pane frame
+   [data-conversation-collapsed="false"]:has(> [data-thread-window]) is the visible conversation column:
+   direct children are the page <header> and [data-thread-window]. The frame
+   sits above the sticky composer fade with pointer-events disabled. The frame
+   is a pseudo-element so the column keeps its native height, flex, and
+   scroll behaviour. The top edge runs through the vertical middle of the
+   header so the title sits on the line, Herdr style.
+   ------------------------------------------------------------------------- */
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) {
+  position: relative;
+  isolation: isolate;
+  padding: var(--herdr-theme-frame-inset);
+  padding-top: 0;
+}
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window])::before {
+  content: "";
+  position: absolute;
+  z-index: 30;
+  top: calc(var(--bb-app-chrome-row-height, 3rem) / 2);
+  right: var(--herdr-theme-frame-inset);
+  bottom: var(--herdr-theme-frame-inset);
+  left: var(--herdr-theme-frame-inset);
+  border: 1px solid var(--herdr-theme-frame-line);
+  border-radius: 0;
+  pointer-events: none;
+  transition: border-color 120ms linear;
+}
+/* Focus: the whole frame turns lavender when this pane is BB's focused split
+   or when anything inside it (editor, buttons) has focus. Two thin lines are
+   all the focus treatment; no glow. */
+:root[data-herdr-theme] [data-split-pane-id][data-focused="true"] [data-conversation-collapsed="false"]:has(> [data-thread-window])::before,
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]):focus-within::before {
+  border-color: var(--herdr-theme-frame-line-focus);
+}
+/* chrome.css outlines the split pane itself. With the frame drawn inside the
+   pane that reads as a double border, so the pane outline is retired here. */
+:root[data-herdr-theme] [data-split-pane-id]:has([data-conversation-collapsed="false"] > [data-thread-window]) {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------------------
+   2. Title on the frame line
+   The native header keeps its height, drag region, and tap targets. Its seam
+   and scrim go away; the frame line passes behind it and the title cluster
+   paints a canvas patch over the line, so the line reads as
+   "┌─ title ··· ───────────── actions ─┐".
+   ------------------------------------------------------------------------- */
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header {
+  position: relative;
+  z-index: 31;
+  border-bottom: 0;
+  background: transparent;
+  padding-inline: calc(var(--herdr-theme-frame-inset) + 0.75rem);
+}
+/* Title cluster: the inner center wrapper that holds the title paragraph and
+   the "···" thread menu. Structural: header > row > center > cluster. */
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header > div > div > div:has(> div > p) {
+  background: var(--canvas);
+  padding-inline: 0.4rem;
+  margin-left: -0.4rem;
+}
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header .bb-thread-title,
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header > div > div > div > div > p {
+  color: var(--muted-foreground);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+:root[data-herdr-theme] [data-split-pane-id][data-focused="true"] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header .bb-thread-title,
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]):focus-within > header .bb-thread-title {
+  color: var(--primary);
+}
+/* BB tints the focused split's title wrapper with --state-active, a
+   translucent wash. Make it solid so the line does not show through. */
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header [data-pane-header-focus-tab] {
+  background: color-mix(in oklab, var(--primary) 12%, var(--canvas));
+}
+/* Right-side header actions also cut the line. */
+:root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header [data-app-page-header-actions] {
+  background: var(--canvas);
+  padding-left: 0.4rem;
+  margin-right: -0.4rem;
+  padding-right: 0.4rem;
+}
+
+/* ---------------------------------------------------------------------------
+   3. Transcript column: pane width, left aligned
+   The scroll content column is the first child of the scroll body inside
+   .thread-scrollbar. It is centered at 760px by default; here it spans the
+   pane and prose is bounded per message instead. Heights, gap, the sticky
+   footer, and the virtual spacer are untouched.
+   ------------------------------------------------------------------------- */
+:root[data-herdr-theme] [data-thread-window] .thread-scrollbar > div > div:first-child:has([data-timeline-row-list]) {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 1rem;
+  padding-top: 0.75rem;
+}
+/* Composer footer: same left edge and width as the transcript. */
+:root[data-herdr-theme] [data-thread-window] .chat-prompt-box {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 1rem;
+}
+/* Match the live prompt to the transcript gutter. The scroll wrapper already
+   supplies 1rem of padding; do not add a second full gutter inside it. */
+:root[data-herdr-theme] [data-thread-window] [data-promptbox-editor-content] .tiptap {
+  padding-left: calc(var(--herdr-theme-marker-gutter) - 1rem);
+}
+:root[data-herdr-theme] [data-thread-window] [data-promptbox-input-region]::before {
+  left: 0.125rem;
+}
+/* Prose measure. Applies to both user and assistant columns. */
+:root[data-herdr-theme] [data-message-column] {
+  max-width: 100%;
+}
+/* When the pane is wide enough for BB's table-of-contents rail (56rem), keep
+   the measure clear of the rail on the right. */
+@container thread-pane (width >= 56rem) {
+  :root[data-herdr-theme] [data-message-column] {
+    max-width: calc(100% - 3rem);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   4. User messages: flat prompt echo instead of a right-aligned bubble
+   Native structure (verified 0.43):
+   [data-message-column].w-full
+     > .group/message.ml-auto.flex.w-fit.max-w-[70%].flex-col.items-end
+       > (optional turn-request label row)
+       > .flex.w-fit.max-w-full.flex-col.items-end
+         > bubble .rounded-xl.border.border-border-seam.bg-surface-recessed.px-4.py-2.5
+         > MessageActionBar slot
+   ------------------------------------------------------------------------- */
+:root[data-herdr-theme] [data-message-column] > .group\/message {
+  margin-left: 0;
+  width: 100%;
+  max-width: 100%;
+  align-items: flex-start;
+}
+:root[data-herdr-theme] [data-message-column] > .group\/message > div {
+  width: 100%;
+  max-width: 100%;
+  align-items: flex-start;
+}
+/* Full-width input band with a chevron in the shared marker gutter. */
+:root[data-herdr-theme] [data-message-column] > .group\/message > div > div:first-child {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: color-mix(in oklab, var(--primary) 9%, var(--canvas));
+  padding: 0.5rem 0.75rem 0.5rem var(--herdr-theme-marker-gutter);
+}
+:root[data-herdr-theme] [data-message-column] > .group\/message > div > div:first-child::before {
+  content: "❯" / "";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.125rem;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 1em;
+  line-height: inherit;
+  pointer-events: none;
+}
+/* Turn-request label ("steer", "queued") sits left with the text. */
+:root[data-herdr-theme] [data-message-column] > .group\/message > div:first-child:not(:last-child):has(> span) {
+  justify-content: flex-start;
+  padding-left: var(--herdr-theme-marker-gutter);
+}
+/* Action bar for user messages: BB pins it to the bubble's right edge. With
+   the bubble gone it moves under the text, aligned with the gutter, same as
+   the assistant bar. Slot height and button sizes are native. */
+:root[data-herdr-theme] [data-message-column] > .group\/message > div > div:nth-child(2) {
+  padding-right: 0;
+}
+:root[data-herdr-theme] [data-message-column] > .group\/message > div > div:nth-child(2) > div {
+  right: auto;
+  left: calc(var(--herdr-theme-marker-gutter) - 0.25rem);
+}
+/* Inline editor for a sent user message: same column, same left edge. */
+:root[data-herdr-theme] [data-timeline-row-id] > div:has(> [data-sent-message-inline-editor-host]) {
+  margin-left: 0;
+  max-width: 100%;
+}
+/* User attachments (images, file chips) were end-aligned to match the
+   bubble. Native: bubble > .mt-2.space-y-2 > .flex.flex-wrap.justify-end. */
+:root[data-herdr-theme] [data-message-column] > .group\/message > div > div:first-child > div:last-child > div {
+  justify-content: flex-start;
+}
+
+/* ---------------------------------------------------------------------------
+   5. Assistant messages: same gutter, agent dot
+   Native: [data-message-column].group/message.w-full.text-sm.leading-relaxed.px-2
+   with the prose, attachments, then the action bar slot.
+   ------------------------------------------------------------------------- */
+:root[data-herdr-theme] [data-message-column].group\/message {
+  position: relative;
+  padding-left: var(--herdr-theme-marker-gutter);
+  padding-right: 0;
+}
+:root[data-herdr-theme] [data-message-column].group\/message::before {
+  content: "●" / "";
+  position: absolute;
+  top: 0;
+  left: 0.125rem;
+  color: var(--attention);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  line-height: inherit;
+  pointer-events: none;
+}
+/* Assistant action bar: native rule is left-0 with -ml-1 inside the padded
+   column, which already lands under the text. Nothing to change. */
+
+/* ---------------------------------------------------------------------------
+   6. Work rows (tools, commands, files, delegation)
+   Untouched apart from the shared left edge: their native px-2 header puts
+   the icon in the same rail as the message markers. Disclosures, copy and
+   edit actions, and nested rows keep their layout.
+   ------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------
+   7. Compact viewports
+   Below 768px the frame hugs the pane: no inset, no side lines, square
+   corners, and the top line sits under the header as a plain seam so the
+   mobile sidebar trigger never crosses it. Tap targets are native.
+   ------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) {
+    padding: 0;
+  }
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window])::before {
+    top: calc(var(--bb-app-chrome-row-height, 3rem) - 1px);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-inline: 0;
+    border-bottom: 0;
+  }
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header {
+    padding-inline: 1rem;
+  }
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header > div > div > div:has(> div > p),
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]) > header [data-app-page-header-actions] {
+    background: transparent;
+    padding-inline: 0;
+    margin-inline: 0;
+  }
+  :root[data-herdr-theme] [data-thread-window] .thread-scrollbar > div > div:first-child:has([data-timeline-row-list]),
+  :root[data-herdr-theme] [data-thread-window] .chat-prompt-box {
+    padding-inline: 0.75rem;
+  }
+  :root[data-herdr-theme] [data-message-column] {
+    max-width: 100%;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   8. Forced colors and reduced motion
+   ------------------------------------------------------------------------- */
+@media (forced-colors: active) {
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window])::before {
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+  :root[data-herdr-theme] [data-split-pane-id][data-focused="true"] [data-conversation-collapsed="false"]:has(> [data-thread-window])::before,
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]):focus-within::before {
+    border-color: Highlight;
+  }
+  :root[data-herdr-theme] [data-message-column] > .group\/message > div > div:first-child::before,
+  :root[data-herdr-theme] [data-message-column].group\/message::before {
+    color: CanvasText;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window])::before {
+    transition: none;
+  }
+}
+
+/* BB centers wide markdown tables with negative inline margins. That breakout
+   crosses our left pane frame. Keep the native scroll wrapper, but bound its
+   outer box to the message text width. Important overrides BB's inline style. */
+:root[data-herdr-theme] [data-message-column] div:has(> div.overflow-x-auto > table) {
+  width: 100% !important;
+  margin-inline: 0 !important;
+  justify-content: flex-start;
+}
+
+@media(min-width:768px) {
+  :root[data-herdr-theme] [data-promptbox]:not([data-promptbox-compact]):not([data-promptbox-voice-active]) [data-promptbox-editor-scroll] { min-height:44px !important; }
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:has(> [data-thread-window]):focus-within::before,
+  :root[data-herdr-theme] [data-split-pane-id][data-focused="true"] [data-conversation-collapsed="false"]:has(> [data-thread-window])::before { border-color:var(--primary); }
+  :root[data-herdr-theme] [data-conversation-collapsed="false"] > header .bb-thread-title { background:var(--primary); color:var(--primary-foreground); padding:2px 10px; }
+  :root[data-herdr-theme] [data-conversation-collapsed="false"]:focus-within > header .bb-thread-title { color:var(--primary-foreground); }
+}
+@media(min-width:768px) {
+  :root[data-herdr-theme] [data-conversation-collapsed="false"] > header .bb-thread-title { color:var(--primary-foreground) !important; }
+}
+/* Native tool panels keep their own tab strip and scroll geometry. */
+@media(min-width:768px) {
+  :root[data-herdr-theme] [data-panel]:has([data-testid="thread-secondary-panel-top-chrome"]) {
+    outline:1px solid var(--border);
+    outline-offset:-1px;
+  }
+  :root[data-herdr-theme] [data-panel]:has([data-testid="thread-secondary-panel-top-chrome"]):focus-within {
+    outline-color:var(--primary);
+  }
+  :root[data-herdr-theme] [data-split-pane-id]:not([data-focused="true"]) [data-conversation-collapsed="false"] > header .bb-thread-title {
+    background:var(--canvas);
+    color:var(--muted-foreground) !important;
+  }
+}
+/* In splits BB owns the header outside the conversation column. */
+:root[data-herdr-theme] [data-split-pane-id] [data-conversation-collapsed="false"]:has(> [data-thread-window]):not(:has(> header))::before { top:0; border-top:0; }
+
+/* Center the standalone new-thread form in available space. Auto margins
+   collapse when content is taller than the pane, keeping its top scrollable. */
+:root[data-herdr-theme] [data-panel-id="root-compose-main-panel"] .overflow-y-auto:has(> div > [data-app-composer-role="primary"]) {
+  display:flex;
+  flex-direction:column;
+}
+:root[data-herdr-theme] [data-panel-id="root-compose-main-panel"] .overflow-y-auto > div:has(> [data-app-composer-role="primary"]) {
+  flex-shrink:0;
+  margin-block:auto;
+  padding-block:0;
+}

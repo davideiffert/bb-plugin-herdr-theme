@@ -1,0 +1,12 @@
+.herdr-palette-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:12px; }
+.herdr-palette-card { display:flex; flex-direction:column; gap:10px; padding:14px; border:1px solid var(--border); border-radius:4px; background:var(--canvas); color:var(--foreground); text-align:left; cursor:pointer; min-width:0; }
+.herdr-palette-card:hover { background:var(--surface-recessed); }
+.herdr-palette-card[aria-pressed="true"] { border-color:var(--primary); box-shadow:inset 0 0 0 1px var(--primary); }
+.herdr-palette-card:focus-visible { outline:2px solid var(--ring); outline-offset:3px; }
+.herdr-palette-card:disabled { cursor:wait; opacity:.65; }
+.herdr-palette-name { display:flex; justify-content:space-between; font-weight:600; }
+.herdr-palette-strip { display:flex; align-items:center; gap:8px; }
+.herdr-palette-mode { width:4ch; font-size:12px; color:var(--muted-foreground); }
+.herdr-palette-swatches { display:flex; height:20px; flex:1; border:1px solid var(--border); }
+.herdr-palette-swatches > span { flex:1; }
+.herdr-palette-note { font-size:12px; color:var(--muted-foreground); }
