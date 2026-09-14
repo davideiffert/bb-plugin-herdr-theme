@@ -117,8 +117,7 @@ not npm.
 
 ## Credits and licenses
 
-Made by David Eiffert, with palette and layout work by Claude Fable 5.1 and
-integration by Codex. Banner illustration generated with OpenAI's image tool.
+Created by David Eiffert. Inspired by Herdr.
 
 Herdr Theme is not affiliated with Herdr, BB, or Catppuccin. Plugin code is
 [MIT licensed](LICENSE).
