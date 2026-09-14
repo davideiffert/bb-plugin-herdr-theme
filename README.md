@@ -11,6 +11,16 @@ An independent, unofficial community project.
 
 [Build checks](https://github.com/davideiffert/bb-plugin-herdr-theme/actions/workflows/check.yml) · [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)
 
+## A familiar thread, a different feel
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/conversation-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/conversation-light.png">
+  <img alt="Herdr Lavender in BB, showing a dashboard conversation, highlighted user messages, and three demo projects with connected child threads and branch names." src="assets/screenshots/conversation-dark.png" width="1440">
+</picture>
+
+*Lavender, with optional branch names enabled. [Dark view](assets/screenshots/conversation-dark.png) · [Light view](assets/screenshots/conversation-light.png).*
+
 ## What changes
 
 - **A terminal-style conversation.** Thin pane frames, highlighted titles, full-width transcripts, and a flat prompt.
@@ -22,6 +32,19 @@ An independent, unofficial community project.
 BB still owns the editor, attachments, voice controls, menus, keyboard shortcuts,
 and thread navigation. This theme does not change agent behavior or add workspace
 management.
+
+## Room for the whole task
+
+![Six related conversations in BB's native split layout, arranged in two rows of three. The Orbit project tree stays visible beside the plan, interface, API, tests, docs, and release review.](assets/screenshots/six-panes-dark.png)
+
+*One plan and five child threads, arranged with BB's native split controls.
+Herdr Theme styles the panes; BB provides the layout and navigation.
+[Open the full-size screenshot](assets/screenshots/six-panes-dark.png).*
+
+These are captures of BB 0.43 running the theme in an isolated demo workspace.
+Projects, branches, and conversations are scripted sample content, with a saved
+model catalog for the demo controls. No private conversations or live agent runs
+are shown.
 
 ## Install the preview
 

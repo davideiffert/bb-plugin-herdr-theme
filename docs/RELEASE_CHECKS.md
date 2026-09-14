@@ -20,4 +20,5 @@ Limits:
 - BB retains its downloaded Git cache after removing the plugin registration.
 - DOM hooks are not versioned; newer BB releases require compatibility checks.
 - Real palette-picker screenshots were captured in a clean test instance.
-- A conversation screenshot from a sample workspace is still desirable.
+- Real single-thread dark/light and six-pane screenshots captured with scripted demo data.
+- Demo controls use a saved model catalog; screenshots do not represent live agent runs.
