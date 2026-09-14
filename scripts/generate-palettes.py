@@ -78,7 +78,7 @@ for id,label,dark,light,code_dark,code_light in families:
  (ROOT/f'themes/{id}.css').write_text('\n'.join(line.rstrip() for line in '\n\n'.join(out).splitlines())+'\n')
  entries.append({'id':id,'name':label,'adaptedLight':light is None,'swatches':swatches})
 manifest=json.loads((ROOT/'package.json').read_text())
-manifest['bb']['themes']=manifest['bb']['themes'][:1]+[{'id':id,'name':'Herdr '+label,'description':label+' with Herdr terminal composition.'+(' Light is a BB adaptation.' if light is None else ''),'css':f'./themes/{id}.css','codeTheme':{'dark':cd,'light':cl}} for id,label,dark,light,cd,cl in families]
+manifest['bb']['themes']=manifest['bb']['themes'][:1]+[{'id':id,'name':'Herdr '+label,'description':label+' colors with Herdr terminal styling.'+(' Light version added by this theme.' if light is None else ''),'css':f'./themes/{id}.css','codeTheme':{'dark':cd,'light':cl}} for id,label,dark,light,cd,cl in families]
 (ROOT/'package.json').write_text(json.dumps(manifest,indent=2)+'\n')
 lavender={mode:dict(re.findall(r'--([\w-]+):\s*([^;]+);', block)) for mode,block in zip(['light','dark'],blocks)}
 entries.insert(0,{'id':'lavender','name':'Lavender','adaptedLight':False,'swatches':{mode:[d[k].strip() for k in ['canvas','sidebar','primary','success','attention']] for mode,d in lavender.items()}})

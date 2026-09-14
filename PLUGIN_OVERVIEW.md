@@ -1,14 +1,14 @@
 Give BB a little terminal character.
 
-Herdr Theme brings framed conversations, full-width transcripts, compact
-prompts, and connected subthread trees to BB. Choose from eleven palette
-families, each with light and dark appearances. Turn on branch names when you
-want repository context beneath your threads.
+Herdr Theme frames conversations like terminal panes, keeps transcripts full
+width, and draws child threads as a connected tree. Pick from eleven color
+families, each with a light and a dark version. Turn on branch names to see the
+Git branch under each project thread.
 
-JetBrains Mono is bundled for offline use. BB's native editor, attachments,
-voice controls, menus, and shortcuts stay in place. Switching to another theme
-removes the extra styling.
+JetBrains Mono is bundled, so nothing is fetched from a font service. BB's
+editor, attachments, voice controls, menus, and shortcuts stay in place.
+Pick another theme and the extra styling goes away.
 
-Inspired by Herdr. An independent, unofficial community project. Workspace
-tabs and saved split arrangements are outside this theme's scope. Some light
-palettes are original BB adaptations, identified in the color picker.
+Inspired by Herdr. Independent and unofficial. Workspace tabs and saved split
+layouts are outside this theme's scope. The picker labels the light versions
+added by this theme.

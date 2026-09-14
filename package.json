@@ -8,7 +8,7 @@
   },
   "bb": {
     "name": "Herdr Theme",
-    "description": "Bring terminal character to BB with eleven palettes, framed conversations, compact prompts, and optional branch details.",
+    "description": "Give BB a little terminal character with eleven palettes, framed conversations, compact prompts, and optional branch names.",
     "branding": {
       "icon": "./assets/icon.svg"
     },
@@ -28,7 +28,7 @@
       {
         "id": "catppuccin",
         "name": "Herdr Catppuccin",
-        "description": "Catppuccin with Herdr terminal composition.",
+        "description": "Catppuccin colors with Herdr terminal styling.",
         "css": "./themes/catppuccin.css",
         "codeTheme": {
           "dark": "catppuccin-mocha",
@@ -38,7 +38,7 @@
       {
         "id": "tokyo-night",
         "name": "Herdr Tokyo Night",
-        "description": "Tokyo Night with Herdr terminal composition.",
+        "description": "Tokyo Night colors with Herdr terminal styling.",
         "css": "./themes/tokyo-night.css",
         "codeTheme": {
           "dark": "tokyo-night",
@@ -48,7 +48,7 @@
       {
         "id": "dracula",
         "name": "Herdr Dracula",
-        "description": "Dracula with Herdr terminal composition. Light is a BB adaptation.",
+        "description": "Dracula colors with Herdr terminal styling. Light version added by this theme.",
         "css": "./themes/dracula.css",
         "codeTheme": {
           "dark": "dracula",
@@ -58,7 +58,7 @@
       {
         "id": "nord",
         "name": "Herdr Nord",
-        "description": "Nord with Herdr terminal composition. Light is a BB adaptation.",
+        "description": "Nord colors with Herdr terminal styling. Light version added by this theme.",
         "css": "./themes/nord.css",
         "codeTheme": {
           "dark": "nord",
@@ -68,7 +68,7 @@
       {
         "id": "gruvbox",
         "name": "Herdr Gruvbox",
-        "description": "Gruvbox with Herdr terminal composition.",
+        "description": "Gruvbox colors with Herdr terminal styling.",
         "css": "./themes/gruvbox.css",
         "codeTheme": {
           "dark": "gruvbox-dark-medium",
@@ -78,7 +78,7 @@
       {
         "id": "one",
         "name": "Herdr One",
-        "description": "One with Herdr terminal composition.",
+        "description": "One colors with Herdr terminal styling.",
         "css": "./themes/one.css",
         "codeTheme": {
           "dark": "one-dark-pro",
@@ -88,7 +88,7 @@
       {
         "id": "solarized",
         "name": "Herdr Solarized",
-        "description": "Solarized with Herdr terminal composition.",
+        "description": "Solarized colors with Herdr terminal styling.",
         "css": "./themes/solarized.css",
         "codeTheme": {
           "dark": "solarized-dark",
@@ -98,7 +98,7 @@
       {
         "id": "kanagawa",
         "name": "Herdr Kanagawa",
-        "description": "Kanagawa with Herdr terminal composition.",
+        "description": "Kanagawa colors with Herdr terminal styling.",
         "css": "./themes/kanagawa.css",
         "codeTheme": {
           "dark": "kanagawa-wave",
@@ -108,7 +108,7 @@
       {
         "id": "rose-pine",
         "name": "Herdr Ros\u00e9 Pine",
-        "description": "Ros\u00e9 Pine with Herdr terminal composition.",
+        "description": "Ros\u00e9 Pine colors with Herdr terminal styling.",
         "css": "./themes/rose-pine.css",
         "codeTheme": {
           "dark": "rose-pine",
@@ -118,7 +118,7 @@
       {
         "id": "vesper",
         "name": "Herdr Vesper",
-        "description": "Vesper with Herdr terminal composition. Light is a BB adaptation.",
+        "description": "Vesper colors with Herdr terminal styling. Light version added by this theme.",
         "css": "./themes/vesper.css",
         "codeTheme": {
           "dark": "vesper",
@@ -136,7 +136,7 @@
     "@types/react-dom": "^19.0.0",
     "typescript": "^5.7.0"
   },
-  "description": "Bring terminal character to BB with eleven palettes, framed conversations, compact prompts, and optional branch details.",
+  "description": "Give BB a little terminal character with eleven palettes, framed conversations, compact prompts, and optional branch names.",
   "license": "MIT",
   "scripts": {
     "build": "node scripts/embed-font.mjs && bb plugin build",
