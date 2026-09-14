@@ -16,10 +16,10 @@ An independent, unofficial community project.
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/conversation-dark.png">
   <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/conversation-light.png">
-  <img alt="Herdr Lavender in BB, showing a dashboard conversation, highlighted user messages, and three demo projects with connected child threads and branch names." src="assets/screenshots/conversation-dark.png" width="1440">
+  <img alt="Herdr Theme in BB, showing a dashboard conversation, highlighted user messages, and three demo projects with connected child threads and branch names." src="assets/screenshots/conversation-dark.png" width="1440">
 </picture>
 
-*Lavender, with optional branch names enabled. [Dark view](assets/screenshots/conversation-dark.png) · [Light view](assets/screenshots/conversation-light.png).*
+*Optional branch names enabled. [Lavender dark](assets/screenshots/conversation-dark.png) · [Catppuccin Latte light](assets/screenshots/conversation-light.png). The image follows your light or dark appearance.*
 
 ## What changes
 
@@ -35,9 +35,9 @@ management.
 
 ## Room for the whole task
 
-![Six related conversations in BB's native split layout, arranged in two rows of three. The Orbit project tree stays visible beside the plan, interface, API, tests, docs, and release review.](assets/screenshots/six-panes-dark.png)
+![Herdr Tokyo Night with six related conversations in BB's native split layout, arranged in two rows of three. The Orbit project tree stays visible beside the plan, interface, API, tests, docs, and release review.](assets/screenshots/six-panes-dark.png)
 
-*One plan and five child threads, arranged with BB's native split controls.
+*Tokyo Night. One plan and five child threads, arranged with BB's native split controls.
 Herdr Theme styles the panes; BB provides the layout and navigation.
 [Open the full-size screenshot](assets/screenshots/six-panes-dark.png).*
 
