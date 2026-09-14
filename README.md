@@ -43,13 +43,12 @@ management.
 Screenshots show BB 0.43 with sample projects and conversations written for the
 demo. They do not show private conversations or live agent runs.
 
-## Install the preview
+## Install
 
-Requires BB 0.43 or newer. There is no tagged release yet, so this installs the
-preview from the main branch:
+Requires BB 0.43 or newer. This installs the latest compatible 0.5 release:
 
 ```sh
-bb plugin install git:https://github.com/davideiffert/bb-plugin-herdr-theme@main
+bb plugin install git:https://github.com/davideiffert/bb-plugin-herdr-theme@^0.5.0
 ```
 
 Open **Settings → Herdr Theme → Color schemes** to choose a palette. Use BB's

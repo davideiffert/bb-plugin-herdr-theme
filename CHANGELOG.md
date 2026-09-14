@@ -2,7 +2,7 @@
 
 ## 0.5.0
 
-First public release candidate.
+First public release.
 
 - Eleven palette families with light and dark appearances.
 - Bundled JetBrains Mono, framed panes, and full-width transcripts.
