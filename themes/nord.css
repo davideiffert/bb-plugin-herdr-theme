@@ -5,12 +5,12 @@
   --herdr-theme-enabled: 1;
   --herdr-theme-id: nord;
 
-  
+
   --font-sans: "Herdr Mono", "JetBrains Mono", SFMono-Regular, Consolas, monospace;
   --font-mono: "Herdr Mono", "JetBrains Mono", SFMono-Regular, Consolas, monospace;
   --radius: 0.3rem;
 
-  
+
   --canvas: #fcfafc;
   --ink: #222730;
   --background: var(--canvas);
@@ -20,14 +20,14 @@
   --popover: #f7f5f7;
   --popover-foreground: #222730;
 
-  
+
   --primary: #48666e;
   --primary-foreground: #ffffff;
   --ring: #48666e;
   --timeline-accent: #506478;
   --file-accent: #4d6665;
 
-  
+
   --muted-foreground: #595b60;
   --readback-foreground: #5d6679;
   --subtle-foreground: #4c566a;
@@ -36,7 +36,7 @@
   --secondary-foreground: #222730;
   --accent-foreground: #222730;
 
-  
+
   --sidebar: #f4f3f5;
   --secondary: #efedf0;
   --accent: #efedf0;
@@ -48,14 +48,14 @@
   --surface-raised-solid: #f7f5f7;
   --surface-scrim: color-mix(in oklab, var(--canvas) 90%, transparent);
 
-  
+
   --state-hover: color-mix(in oklab, var(--ink) 6%, transparent);
   --state-active: color-mix(in oklab, var(--primary) 12%, transparent);
   --sidebar-accent: #eaebee;
   --surface-selected: color-mix(in oklab, var(--primary) 12%, transparent);
   --surface-selected-border: color-mix(in oklab, var(--primary) 40%, transparent);
 
-  
+
   --border: #d0d0d3;
   --border-hairline: #d7d6d9;
   --border-seam: #e6e5e8;
@@ -63,7 +63,7 @@
   --sidebar-border: #dbdadd;
   --input: #bbbbbf;
 
-  
+
   --destructive: #954c53;
   --destructive-foreground: #ffffff;
   --destructive-text: #954c53;
@@ -75,7 +75,7 @@
   --diff-removed: #954c53;
   --pr-merged: #71596d;
 
-  
+
   --ansi-0: #3b4252;  --ansi-bg-fg-0: #ffffff;
   --ansi-1: #954c53;  --ansi-bg-fg-1: #ffffff;
   --ansi-2: #56654a;  --ansi-bg-fg-2: #ffffff;
@@ -98,7 +98,7 @@
   --herdr-theme-enabled: 1;
   --herdr-theme-id: nord;
 
-  
+
   --canvas: #2e3440;
   --ink: #eceff4;
   --background: var(--canvas);
@@ -108,14 +108,14 @@
   --popover: #333944;
   --popover-foreground: #eceff4;
 
-  
+
   --primary: #88c0d0;
   --primary-foreground: #000000;
   --ring: #88c0d0;
   --timeline-accent: #a0b8d0;
   --file-accent: #92bebd;
 
-  
+
   --muted-foreground: #d8dee9;
   --readback-foreground: #abb1bc;
   --subtle-foreground: #a6aab4;
@@ -124,7 +124,7 @@
   --secondary-foreground: #eceff4;
   --accent-foreground: #eceff4;
 
-  
+
   --sidebar: #353b46;
   --secondary: #393f4b;
   --accent: #393f4b;
@@ -136,14 +136,14 @@
   --surface-raised-solid: #333944;
   --surface-scrim: color-mix(in oklab, var(--canvas) 90%, transparent);
 
-  
+
   --state-hover: color-mix(in oklab, var(--ink) 8%, transparent);
   --state-active: color-mix(in oklab, var(--primary) 14%, transparent);
   --sidebar-accent: #37424e;
   --surface-selected: color-mix(in oklab, var(--primary) 14%, transparent);
   --surface-selected-border: color-mix(in oklab, var(--primary) 45%, transparent);
 
-  
+
   --border: #545964;
   --border-hairline: #4e545f;
   --border-seam: #414752;
@@ -151,7 +151,7 @@
   --sidebar-border: #4a505b;
   --input: #676c76;
 
-  
+
   --destructive: #dcaaaf;
   --destructive-foreground: #000000;
   --destructive-text: #dcaaaf;
@@ -163,7 +163,7 @@
   --diff-removed: #dcaaaf;
   --pr-merged: #c9aec4;
 
-  
+
   --ansi-0: #3b4252;  --ansi-bg-fg-0: #ffffff;
   --ansi-1: #dcaaaf;  --ansi-bg-fg-1: #000000;
   --ansi-2: #a3be8c;  --ansi-bg-fg-2: #000000;
