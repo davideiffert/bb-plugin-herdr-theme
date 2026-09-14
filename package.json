@@ -8,7 +8,7 @@
   },
   "bb": {
     "name": "Herdr Theme",
-    "description": "A terminal-inspired BB workspace with framed panes, a left-aligned transcript, and eleven light and dark color families.",
+    "description": "Bring terminal character to BB with eleven palettes, framed conversations, compact prompts, and optional branch details.",
     "branding": {
       "icon": "./assets/icon.svg"
     },
@@ -136,7 +136,7 @@
     "@types/react-dom": "^19.0.0",
     "typescript": "^5.7.0"
   },
-  "description": "A terminal-inspired BB workspace with framed panes, a left-aligned transcript, and eleven light and dark color families.",
+  "description": "Bring terminal character to BB with eleven palettes, framed conversations, compact prompts, and optional branch details.",
   "license": "MIT",
   "scripts": {
     "build": "node scripts/embed-font.mjs && bb plugin build",

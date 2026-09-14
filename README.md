@@ -1,63 +1,82 @@
+![Herdr Theme: A little terminal character for BB. Pixel sheep in lavender terminal frames.](assets/banner.png)
+
 # Herdr Theme
 
-An unofficial Herdr-inspired theme plugin for BB. Eleven color families, flat prompts, and a
-bundled monospace font, inspired by Herdr's workspace.
+Bring a little terminal character to BB. Herdr Theme pairs eleven color families
+with framed conversations, compact prompts, and a thread tree that looks at home
+in a terminal.
 
-## Features
+Inspired by [Herdr](https://herdr.dev/). Built for BB's threads and subthreads.
+An independent, unofficial community project.
 
-- Eleven color families with dark and light appearances in BB's native palette picker.
-- A Color schemes section in plugin settings with light/dark swatches and saved selection.
-- Framed conversations with the native title set into the top border.
-- Left-aligned transcript, full-width user-message highlights, and distinct role markers.
-- Matching full-width user and assistant columns that wrap with the pane.
-- Flat composer with a decorative prompt marker and focus lines.
-- Muted unruled project headings, flat selection, and terminal tree connectors for child threads.
-- Bottom New thread/Search commands and a Menu for other destinations.
-- Compact desktop composer that grows with text; native phone editor sizing.
-- Solid conversation title chips and focused pane borders.
-- Solid accent-colored active tabs and thin focused split-pane outlines.
-- JetBrains Mono bundled locally. No font service or network requests.
-- Coordinated code highlighting for each family.
+[Build checks](https://github.com/davideiffert/bb-plugin-herdr-theme/actions/workflows/check.yml) · [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)
 
-The plugin keeps BB's native editor, attachments, voice controls, menus,
-shortcuts, and send button. It does not read drafts or change agent behavior.
-Extra styling only applies while a Herdr Theme palette is selected. Selecting
-another theme or disabling Herdr Theme removes that styling.
+## What changes
 
-## Setup
+- **A terminal-style conversation.** Thin pane frames, highlighted titles, full-width transcripts, and a flat prompt.
+- **A readable thread tree.** Connected child-thread branches, clear selection, and colored native activity indicators.
+- **Details when you want them.** Optional Git branch names beneath project-thread titles, including `main`.
+- **Eleven palette families.** Light and dark appearances, coordinated code highlighting, and a swatch picker in settings.
+- **Local typography.** JetBrains Mono is bundled. No font service or network request required.
 
-Requires BB 0.43 or newer. Install from Git after the v0.5.0 release is published:
+BB still owns the editor, attachments, voice controls, menus, keyboard shortcuts,
+and thread navigation. This theme does not change agent behavior or add workspace
+management.
+
+## Install the preview
+
+Requires BB 0.43 or newer. The public repository is available; the first tagged
+release is still being prepared. This command installs the current preview:
 
 ```sh
-bb plugin install git:https://github.com/davideiffert/bb-plugin-herdr-theme@v0.5.0
+bb plugin install git:https://github.com/davideiffert/bb-plugin-herdr-theme@main
 ```
 
-This is a release candidate. The public repository and tag are not published yet.
+Open **Settings → Herdr Theme → Color schemes** to choose a palette. Use BB's
+Appearance settings for Light, Dark, or System. Select another theme to return
+to its appearance; Herdr's extra styling turns off automatically.
 
-After installing, choose a palette in Settings → Herdr Theme → Color schemes.
-Light, Dark, and System appearance remain BB settings. Optional **Show branch
-names** adds the known branch beneath stock project-thread rows, including
-`main`. It defaults to off. Pinned rows and replacement sidebars do not show
-these branch annotations.
+## Find your colors
+
+Lavender, Catppuccin, Tokyo Night, Dracula, Nord, Gruvbox, One, Solarized,
+Kanagawa, Rosé Pine, and Vesper.
+
+Lavender is original to this theme. The other ten families adapt Herdr's palette
+values for BB. Dracula, Nord, and Vesper include original BB light companions,
+clearly labeled in the picker.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/screenshots/palettes-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/palettes-light.png">
+  <img alt="Herdr Theme settings showing all eleven palette families with light and dark swatches." src="assets/screenshots/palettes-dark.png" width="770">
+</picture>
+
+*The palette picker in BB. Captured in a clean test instance.*
+
+## Optional branch names
+
+Turn on **Show branch names** in **Settings → Herdr Theme → Configuration**.
+It is off by default. Threads with a branch known to BB get a second line;
+threads without one stay single-line. Pinned rows and replacement sidebars do
+not display these branch annotations.
 
 ## Compatibility
 
-BB owns thread navigation, editing, attachments, voice input and split behavior.
-This plugin changes their presentation. It does not provide workspace tabs or
-save split arrangements. Those belong in a separate plugin.
+Tested on BB 0.43. Composition relies on existing BB interface hooks, which are
+not a versioned styling API. New BB versions may require adjustments.
 
-Composition uses BB's existing DOM hooks, which are not a versioned styling
-API. Tested on BB 0.43. Recheck after BB updates. Both known native sidebar
-title wrappers are supported. Folders keeps its own thread list. Compact
-Navigation and Herdr use the same exclusive navigation slot; only one supplies
-navigation at a time.
+- Folders keeps its own thread list.
+- Compact Navigation and Herdr use the same navigation slot. Only one supplies the navigation at a time.
+- Mobile web retains BB's native sidebar and touch controls. The iPhone editor has been user-tested; automated phone checks use browser emulation. Actual microphone recording has not been independently verified.
+- Workspace tabs and saved split arrangements are outside this theme's scope.
 
-Switching to another palette removes Herdr's extra styling. Disabling the
-plugin unloads its UI code. Mobile web retains native BB sidebar and touch
-controls. The iPhone editor has been checked by a user; automated phone checks use
-browser emulation. Actual microphone recording is not independently verified.
+See [release checks](docs/RELEASE_CHECKS.md) for the current verification limits.
 
-## Development
+## Contribute
+
+Found a problem? [Open an issue](https://github.com/davideiffert/bb-plugin-herdr-theme/issues)
+with your BB version, palette, device, and reproduction steps. Focused pull
+requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
 ```sh
 npm ci
@@ -65,32 +84,25 @@ npm run check
 npm run build
 ```
 
-The committed font.css is intentional. BB's Git installer builds the plugin
-directly without running npm lifecycle scripts. Regenerate it with the build
-command after changing the bundled WOFF2. This candidate is not an npm release.
+The committed `font.css` is intentional. BB's Git installer builds the plugin
+directly without running npm lifecycle scripts. The build command regenerates
+it from the bundled WOFF2. This project is currently distributed through Git,
+not npm.
 
-## Help and contributions
+## Credits and licenses
 
-Use GitHub Issues for bugs and small feature proposals. Include BB version,
-palette, device, and steps to reproduce. Contributions arrive through pull
-requests; see [CONTRIBUTING.md](CONTRIBUTING.md). See [CHANGELOG.md](CHANGELOG.md)
-for release notes.
+Created with David Eiffert, with palette and composition work by Fable 5.1 and
+integration by Codex. Banner illustration generated with OpenAI's image tool.
 
-## Credits
+Herdr Theme is not affiliated with Herdr, BB, or Catppuccin. Plugin code is
+[MIT licensed](LICENSE).
 
-Independent community work inspired by [Herdr](https://herdr.dev/) and
-[Catppuccin](https://github.com/catppuccin/catppuccin). Not affiliated with
-either project. Original palette design by Fable 5.1, integrated and checked
-by Codex with David Eiffert.
+[JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) is bundled under the
+[SIL Open Font License](assets/OFL.txt). `Herdr Mono` is its local CSS alias,
+not a modified font. The regular variable face supports weights 100 through
+800; italics use browser synthesis.
 
-[JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) is bundled under
-the [SIL Open Font License](assets/OFL.txt). `Herdr Mono` is its local CSS
-family alias, not a modified font. The regular variable face includes weights
-100 through 800. Italics use the browser's synthesis.
-
-Ten families adapt the palettes in Herdr's source. Dracula, Nord, and Vesper
-have original BB light companions, labeled in the picker. Lavender is our
-original palette. See [palette provenance](palettes/README.md) for the source
-revision, adaptations, and bundled Apache 2.0 license.
-
-Plugin code is MIT licensed.
+Imported palettes retain Herdr's [Apache 2.0 license](palettes/LICENSE-herdr.txt).
+See [palette provenance](palettes/README.md) for the source revision and
+adaptations, including the [Catppuccin](https://github.com/catppuccin/catppuccin)
+family.

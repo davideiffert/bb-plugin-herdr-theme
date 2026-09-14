@@ -2,7 +2,7 @@
 
 Candidate version 0.5.0. Runtime source includes development commit 13efd16; README
 and internal-document selection were adjusted for a public package. No Git
-history is included. No public release or tag exists yet.
+history is included. The public repository is available. No release tag exists yet.
 
 Passed on BB 0.43:
 - Clean dependency install, typecheck, plugin builds and bundled font identity.
@@ -19,4 +19,5 @@ Limits:
 - npm packaging is unsupported by this candidate; it omits prebuilt dist files.
 - BB retains its downloaded Git cache after removing the plugin registration.
 - DOM hooks are not versioned; newer BB releases require compatibility checks.
-- Public product screenshots still need capturing from a clean sample workspace.
+- Real palette-picker screenshots were captured in a clean test instance.
+- A conversation screenshot from a sample workspace is still desirable.
