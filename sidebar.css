@@ -40,14 +40,14 @@
   }
 }
 
-/* Keep work first and commands at the foot of the sidebar. */
-:root[data-herdr-theme] [data-testid="sidebar-navigation-region"]:has(.herdr-commands) { order: 2; flex-shrink: 1; min-height: 0; position:relative; z-index:60; }
+/* Commands sit at the top of the sidebar, like BB's default theme. */
+:root[data-herdr-theme] [data-testid="sidebar-navigation-region"]:has(.herdr-commands) { order: 0; flex-shrink: 1; min-height: 0; }
 :root[data-herdr-theme] [data-sidebar="footer"] { order: 3; }
 :root[data-herdr-theme] [data-testid="app-sidebar-navigation-divider"] { display: none; }
 :root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p) > svg { display: none; }
 :root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p)::before { content: "·" / ""; color: var(--subtle-foreground); }
 :root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p) > p { text-transform: lowercase; color: var(--subtle-foreground); }
-.herdr-commands { display:flex; flex-direction:column; align-items:stretch; gap:2px; padding:8px; border-top:1px solid var(--border-seam); font-size:12px; min-height:0; }
+.herdr-commands { display:flex; flex-direction:column; align-items:stretch; gap:2px; padding:8px; border-bottom:1px solid var(--border-seam); font-size:12px; min-height:0; }
 .herdr-commands button { cursor:pointer; padding:6px; min-height:32px; text-align:left; color:var(--muted-foreground); }
 .herdr-commands button:hover, .herdr-commands button[aria-pressed="true"] { background:var(--state-hover); color:var(--foreground); }
 .herdr-commands button:focus-visible { outline:2px solid var(--ring); }
