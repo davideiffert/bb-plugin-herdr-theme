@@ -96,9 +96,6 @@
   text-align:center;
   color:var(--subtle-foreground);
 }
-/* Herdr lists every destination itself, so BB's duplicate footer nav stays hidden. */
-:root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands) > [data-sidebar="footer"] { display:none; }
-:root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands) > [data-sidebar="footer"]:focus-within { display:flex; }
 
 /* Continuous tree strokes grow with native rows, including branch details.
    The arm meets the title; the last child's vertical stops at that arm. */
