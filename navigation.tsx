@@ -33,7 +33,7 @@ export function Navigation(props: ExperimentalSidebarNavigationProps) {
       <div className="herdr-command-groups">
         <CommandGroup title="workspace" items={workspace} {...shared} />
         <CommandGroup title="plugins" items={plugins} {...shared} />
-        <CommandGroup title="hidden" items={hidden} {...shared} />
+        {editing && <CommandGroup title="hidden" items={hidden} {...shared} />}
       </div>
       <div className="herdr-commands-footer">
         <button type="button" onClick={() => nav.actions.openCustomize()}>
