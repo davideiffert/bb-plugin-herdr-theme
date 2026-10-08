@@ -59,7 +59,7 @@
 .herdr-command-row { display:flex; align-items:center; gap:2px; }
 .herdr-command-row .herdr-command-label { flex:1 1 auto; display:flex; align-items:center; gap:6px; min-width:0; }
 .herdr-command-row .herdr-command-mini { flex:none; width:auto; padding:6px 5px; font-size:11px; color:var(--subtle-foreground); }
-.herdr-command-icon { width:14px; height:14px; flex:none; }
+.herdr-command-icon { width:14px; height:14px; flex:none; pointer-events:none; }
 .herdr-commands kbd { margin-left:auto; font-family:var(--font-mono); font-size:10px; line-height:1.4; padding:0 4px; border:1px solid var(--border); border-radius:3px; color:var(--subtle-foreground); }
 .herdr-command-accessory { flex:none; display:inline-flex; align-items:center; max-width:4rem; max-height:1.25rem; overflow:hidden; }
 .herdr-commands-footer { flex:none; display:flex; align-items:center; gap:2px; border-top:1px solid var(--border-seam); margin-top:4px; padding-top:4px; }

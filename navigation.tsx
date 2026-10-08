@@ -109,7 +109,6 @@ function CommandRow({
         className="herdr-command-label"
         disabled={item.isDisabled || item.isLoading}
         aria-pressed={activeItemId === item.id}
-        title={item.shortcut ? `${item.label} (${item.shortcut.label})` : item.label}
         aria-keyshortcuts={item.shortcut?.ariaKeyShortcuts}
         {...split.splitProps}
         onClick={(event) => {
