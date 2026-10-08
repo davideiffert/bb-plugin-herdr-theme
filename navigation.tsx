@@ -1,5 +1,5 @@
 import { useHerdrTheme } from "./use-herdr-theme";
-import { useRef } from "react";
+import { useState } from "react";
 import {
   experimental_SidebarNavigationIcon as SidebarNavigationIcon,
   experimental_useSidebarNavigation,
@@ -15,136 +15,90 @@ export function Navigation(props: ExperimentalSidebarNavigationProps) {
   const enabled = useHerdrTheme();
   // Hooks stay unconditional so the early return below never reorders them.
   const nav = experimental_useSidebarNavigation();
+  const [editing, setEditing] = useState(false);
   if (!enabled) return <props.experimental_Original />;
-  // Hidden items stay reachable in the overflow menu, per SDK guidance.
-  const primary = nav.items.filter(
-    (i) => i.isVisible && (i.action.kind === "new-thread" || i.action.kind === "search-threads"),
-  );
-  const rest = nav.items.filter((i) => !primary.includes(i));
+  // BB's own destinations, plugin panels, and hidden items stay in their own
+  // groups so nothing hides behind a dropdown. Empty groups render nothing.
+  const workspace = nav.items.filter((i) => i.isVisible && i.pluginId === null);
+  const plugins = nav.items.filter((i) => i.isVisible && i.pluginId !== null);
+  const hidden = nav.items.filter((i) => !i.isVisible);
+  const shared = {
+    activeItemId: nav.activeItemId,
+    shortcutHeld: nav.isShortcutModifierHeld,
+    actions: nav.actions,
+    editing,
+  };
   return (
     <nav className="herdr-commands" aria-label="Workspace commands">
-      {!props.isCompactViewport &&
-        primary.map((item) => (
-          <NavButton
-            key={item.id}
-            item={item}
-            activeItemId={nav.activeItemId}
-            shortcutHeld={nav.isShortcutModifierHeld}
-            actions={nav.actions}
-          />
-        ))}
-      <CommandMenu
-        items={props.isCompactViewport ? nav.items : rest}
-        activeItemId={nav.activeItemId}
-        shortcutHeld={nav.isShortcutModifierHeld}
-        actions={nav.actions}
-      />
+      <CommandGroup title="workspace" items={workspace} {...shared} />
+      <CommandGroup title="plugins" items={plugins} {...shared} />
+      <CommandGroup title="hidden" items={hidden} {...shared} />
+      <div className="herdr-commands-footer">
+        <button type="button" onClick={() => nav.actions.openCustomize()}>
+          Customize…
+        </button>
+        <button
+          type="button"
+          aria-pressed={editing}
+          title={editing ? "Hide row controls" : "Show Hide, Details, and Disable controls"}
+          onClick={() => setEditing((v) => !v)}
+        >
+          {editing ? "Done" : "Edit"}
+        </button>
+      </div>
     </nav>
   );
 }
 
-function NavButton({
-  item,
-  activeItemId,
-  shortcutHeld,
-  actions,
-}: {
-  item: ExperimentalSidebarNavigationItem;
-  activeItemId: string | null;
-  shortcutHeld: boolean;
-  actions: ExperimentalSidebarNavigationActions;
-}) {
-  const split = experimental_useSidebarNavigationSplit(item.id);
-  return (
-    <button
-      type="button"
-      disabled={item.isDisabled || item.isLoading}
-      aria-pressed={activeItemId === item.id}
-      title={item.shortcut ? `${item.label} (${item.shortcut.label})` : item.label}
-      aria-keyshortcuts={item.shortcut?.ariaKeyShortcuts}
-      {...split.splitProps}
-      onClick={(event) => {
-        actions.activate(item.id, { openInSplit: event.shiftKey });
-      }}
-    >
-      <SidebarNavigationIcon icon={item.icon} className="herdr-command-icon" />
-      <span>{item.label}</span>
-      {shortcutHeld && item.shortcut && <kbd>{item.shortcut.label}</kbd>}
-    </button>
-  );
-}
-
-function CommandMenu({
+function CommandGroup({
+  title,
   items,
   activeItemId,
   shortcutHeld,
   actions,
+  editing,
 }: {
+  title: string;
   items: readonly ExperimentalSidebarNavigationItem[];
   activeItemId: string | null;
   shortcutHeld: boolean;
   actions: ExperimentalSidebarNavigationActions;
+  editing: boolean;
 }) {
-  const menu = useRef<HTMLDetailsElement>(null);
-  const closeMenu = () => {
-    if (menu.current) menu.current.open = false;
-  };
+  if (items.length === 0) return null;
   return (
-    <details
-      ref={menu}
-      onKeyDown={(event) => {
-        if (event.key === "Escape" && menu.current) {
-          menu.current.open = false;
-          menu.current.querySelector("summary")?.focus();
-        }
-      }}
-    >
-      <summary>Menu</summary>
-      <div className="herdr-command-menu">
-        {items.map((item) => (
-          <MenuRow
-            key={item.id}
-            item={item}
-            activeItemId={activeItemId}
-            shortcutHeld={shortcutHeld}
-            actions={actions}
-            onNavigate={closeMenu}
-          />
-        ))}
-        <div className="herdr-command-menu-footer">
-          <button
-            type="button"
-            onClick={() => {
-              actions.openCustomize();
-              closeMenu();
-            }}
-          >
-            Customize…
-          </button>
-        </div>
+    <div className="herdr-command-group">
+      <div className="herdr-command-group-title" aria-hidden="true">
+        {title}
       </div>
-    </details>
+      {items.map((item) => (
+        <CommandRow
+          key={item.id}
+          item={item}
+          activeItemId={activeItemId}
+          shortcutHeld={shortcutHeld}
+          actions={actions}
+          editing={editing}
+        />
+      ))}
+    </div>
   );
 }
 
-function MenuRow({
+function CommandRow({
   item,
   activeItemId,
   shortcutHeld,
   actions,
-  onNavigate,
+  editing,
 }: {
   item: ExperimentalSidebarNavigationItem;
   activeItemId: string | null;
   shortcutHeld: boolean;
   actions: ExperimentalSidebarNavigationActions;
-  onNavigate: () => void;
+  editing: boolean;
 }) {
-  // Distance activation so the menu's own pointer handling keeps working.
-  const split = experimental_useSidebarNavigationSplit(item.id, {
-    activation: "distance",
-    onDragStart: onNavigate,
-  });
+  const split = experimental_useSidebarNavigationSplit(item.id);
   const Accessory = item.experimental_Accessory;
   return (
     <div className="herdr-command-row">
@@ -158,7 +112,6 @@ function MenuRow({
         {...split.splitProps}
         onClick={(event) => {
           actions.activate(item.id, { openInSplit: event.shiftKey });
-          onNavigate();
         }}
       >
         <SidebarNavigationIcon icon={item.icon} className="herdr-command-icon" />
@@ -170,36 +123,41 @@ function MenuRow({
           <Accessory />
         </span>
       )}
-      <button
-        type="button"
-        className="herdr-command-mini"
-        title={item.isVisible ? `Hide ${item.label} from the sidebar` : `Show ${item.label} in the sidebar`}
-        onClick={() => actions.setVisible(item.id, !item.isVisible)}
-      >
-        {item.isVisible ? "Hide" : "Show"}
-      </button>
-      {item.pluginId && (
+      {editing && (
         <>
           <button
             type="button"
             className="herdr-command-mini"
-            title={`About ${item.label}`}
-            onClick={() => {
-              actions.openDetails(item.id);
-              onNavigate();
-            }}
+            title={
+              item.isVisible
+                ? `Hide ${item.label} from the sidebar`
+                : `Show ${item.label} in the sidebar`
+            }
+            onClick={() => actions.setVisible(item.id, !item.isVisible)}
           >
-            Details
+            {item.isVisible ? "Hide" : "Show"}
           </button>
-          <button
-            type="button"
-            className="herdr-command-mini"
-            title={`Disable ${item.label}`}
-            // The host toasts failures; swallow here to avoid an unhandled rejection.
-            onClick={() => void actions.disablePlugin(item.id).catch(() => {})}
-          >
-            Disable
-          </button>
+          {item.pluginId && (
+            <>
+              <button
+                type="button"
+                className="herdr-command-mini"
+                title={`About ${item.label}`}
+                onClick={() => actions.openDetails(item.id)}
+              >
+                Details
+              </button>
+              <button
+                type="button"
+                className="herdr-command-mini"
+                title={`Disable ${item.label}`}
+                // The host toasts failures; swallow here to avoid an unhandled rejection.
+                onClick={() => void actions.disablePlugin(item.id).catch(() => {})}
+              >
+                Disable
+              </button>
+            </>
+          )}
         </>
       )}
     </div>

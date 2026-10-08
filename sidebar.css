@@ -47,32 +47,28 @@
 :root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p) > svg { display: none; }
 :root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p)::before { content: "·" / ""; color: var(--subtle-foreground); }
 :root[data-herdr-theme] [data-sidebar-project-id] div:has(> svg[data-icon="MessageSquare"] + p) > p { text-transform: lowercase; color: var(--subtle-foreground); }
-.herdr-commands { display:flex; align-items:center; gap:4px; padding:8px; border-top:1px solid var(--border-seam); font-size:12px; }
-.herdr-commands button, .herdr-commands summary { cursor:pointer; padding:6px; min-height:32px; text-align:left; color:var(--muted-foreground); }
-.herdr-commands button:hover, .herdr-commands summary:hover, .herdr-commands button[aria-pressed="true"] { background:var(--state-hover); color:var(--foreground); }
-.herdr-commands button:focus-visible, .herdr-commands summary:focus-visible { outline:2px solid var(--ring); }
+.herdr-commands { display:flex; flex-direction:column; align-items:stretch; gap:2px; padding:8px; border-top:1px solid var(--border-seam); font-size:12px; }
+.herdr-commands button { cursor:pointer; padding:6px; min-height:32px; text-align:left; color:var(--muted-foreground); }
+.herdr-commands button:hover, .herdr-commands button[aria-pressed="true"] { background:var(--state-hover); color:var(--foreground); }
+.herdr-commands button:focus-visible { outline:2px solid var(--ring); }
 .herdr-commands button:disabled { opacity:.5; cursor:default; }
-.herdr-commands details { margin-left:auto; position:relative; }
-.herdr-commands summary { list-style:none; }
-.herdr-commands summary::-webkit-details-marker { display:none; }
-.herdr-command-menu { position:absolute; bottom:100%; right:0; z-index:60; width:250px; max-height:60dvh; overflow:auto; padding:4px; background:var(--popover); border:1px solid var(--border); box-shadow:0 4px 16px #0003; }
-.herdr-command-menu button { display:block; width:100%; }
-/* Primary buttons line up host icons with labels. */
-.herdr-commands > button { display:inline-flex; align-items:center; gap:6px; }
+.herdr-command-group { display:flex; flex-direction:column; gap:1px; }
+.herdr-command-group-title { padding:6px 6px 2px; font-size:11px; color:var(--subtle-foreground); }
+.herdr-command-row { display:flex; align-items:center; gap:2px; }
+.herdr-command-row .herdr-command-label { flex:1 1 auto; display:flex; align-items:center; gap:6px; min-width:0; }
+.herdr-command-row .herdr-command-mini { flex:none; width:auto; padding:6px 5px; font-size:11px; color:var(--subtle-foreground); }
 .herdr-command-icon { width:14px; height:14px; flex:none; }
 .herdr-commands kbd { margin-left:auto; font-family:var(--font-mono); font-size:10px; line-height:1.4; padding:0 4px; border:1px solid var(--border); border-radius:3px; color:var(--subtle-foreground); }
-/* Menu rows pair the label with per-item controls and panel accessories. */
-.herdr-command-menu .herdr-command-row { display:flex; align-items:center; gap:2px; }
-.herdr-command-menu .herdr-command-row .herdr-command-label { flex:1 1 auto; display:flex; align-items:center; gap:6px; min-width:0; }
-.herdr-command-menu .herdr-command-row .herdr-command-mini { flex:none; width:auto; padding:6px 5px; font-size:11px; color:var(--subtle-foreground); }
-.herdr-command-menu .herdr-command-accessory { flex:none; display:inline-flex; align-items:center; max-width:4rem; max-height:1.25rem; overflow:hidden; }
-.herdr-command-menu-footer { border-top:1px solid var(--border-seam); margin-top:4px; padding-top:4px; }
-@media (pointer:coarse) { .herdr-commands button, .herdr-commands summary { min-height:44px; } }
+.herdr-command-accessory { flex:none; display:inline-flex; align-items:center; max-width:4rem; max-height:1.25rem; overflow:hidden; }
+.herdr-commands-footer { display:flex; align-items:center; gap:2px; border-top:1px solid var(--border-seam); margin-top:4px; padding-top:4px; }
+.herdr-commands-footer button { color:var(--subtle-foreground); }
+.herdr-commands-footer button:last-child { margin-left:auto; }
+@media (pointer:coarse) { .herdr-commands button { min-height:44px; } }
 /* Native child-thread guide spans are decorative; indentation remains. */
 :root[data-herdr-theme] [data-sidebar-project-id] span[aria-hidden="true"].w-px.bg-border-hairline { display:none; }
 
 /* Herdr uses lowercase command labels; work names keep their own casing. */
-.herdr-commands button, .herdr-commands summary { text-transform:lowercase; }
+.herdr-commands button { text-transform:lowercase; }
 
 /* Expose BB's real expand/collapse controls as tree markers. */
 :root[data-herdr-theme] .group\/thread-row:has(> [data-sidebar-thread-id]) button:is([aria-label^="Collapse "], [aria-label^="Expand "]) {
@@ -98,9 +94,8 @@
   text-align:center;
   color:var(--subtle-foreground);
 }
-/* Menu also reveals BB's original utility controls, preserving their actions. */
+/* Herdr lists every destination itself, so BB's duplicate footer nav stays hidden. */
 :root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands) > [data-sidebar="footer"] { display:none; }
-:root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands details[open]) > [data-sidebar="footer"],
 :root[data-herdr-theme] [data-sidebar="sidebar"]:has(.herdr-commands) > [data-sidebar="footer"]:focus-within { display:flex; }
 
 /* Continuous tree strokes grow with native rows, including branch details.
