@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Sidebar navigation follows the SDK 0.6 sidebar-navigation API: host icons,
+  shortcut hints, compact-viewport menu, Hide/Show per item, panel details,
+  and a Customize entry.
+- Optional Monospace interface setting for system sans UI text.
+- Prefixed slot IDs (`herdr-*`) and broader typecheck coverage.
+
 ## 0.5.0
 
 First public release.

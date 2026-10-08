@@ -11,7 +11,8 @@ export function BranchDetails() {
 
 function ActiveBranchDetails() {
   const { threads } = experimental_useSidebarThreads();
-  const branches = JSON.stringify(threads.filter(t => t.environment?.branchName)
+  const list = threads ?? [];
+  const branches = JSON.stringify(list.filter(t => t.environment?.branchName)
     .map(t => [t.id, t.environment!.branchName]).sort((a, b) => a[0]!.localeCompare(b[0]!)));
   useEffect(() => {
     const names = new Map<string, string>(JSON.parse(branches));
@@ -20,8 +21,9 @@ function ActiveBranchDetails() {
       document.querySelectorAll<HTMLElement>("[data-sidebar-project-id] [data-sidebar-thread-id]").forEach(link => {
         const row = link.closest(".group\\/thread-row");
         const title = row?.querySelector<HTMLElement>(".bb-thread-title, .bb-sidebar-thread-title");
-        if (!title) return;
-        const branch = names.get(link.dataset.sidebarThreadId!);
+        const threadId = link.dataset.sidebarThreadId;
+        if (!title || !threadId) return;
+        const branch = names.get(threadId);
         if (branch) {
           if (title.dataset.herdrBranch !== branch) title.dataset.herdrBranch = branch;
           owned.add(title);

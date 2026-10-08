@@ -1,5 +1,9 @@
 /* Bounded to native BB prompts and pane tabs. The content script removes
    data-herdr-theme on theme switch, reload, and plugin disposal. */
+/* Monospace-interface opt-out: system sans for UI text, mono kept for code. */
+:root[data-herdr-theme][data-herdr-sans] {
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 :root[data-herdr-theme] [data-promptbox] {
   border-radius: 0;
   border-width: 1px 0;
