@@ -55,8 +55,18 @@
 .herdr-commands details { margin-left:auto; position:relative; }
 .herdr-commands summary { list-style:none; }
 .herdr-commands summary::-webkit-details-marker { display:none; }
-.herdr-command-menu { position:absolute; bottom:100%; right:0; z-index:60; width:210px; max-height:60dvh; overflow:auto; padding:4px; background:var(--popover); border:1px solid var(--border); box-shadow:0 4px 16px #0003; }
+.herdr-command-menu { position:absolute; bottom:100%; right:0; z-index:60; width:250px; max-height:60dvh; overflow:auto; padding:4px; background:var(--popover); border:1px solid var(--border); box-shadow:0 4px 16px #0003; }
 .herdr-command-menu button { display:block; width:100%; }
+/* Primary buttons line up host icons with labels. */
+.herdr-commands > button { display:inline-flex; align-items:center; gap:6px; }
+.herdr-command-icon { width:14px; height:14px; flex:none; }
+.herdr-commands kbd { margin-left:auto; font-family:var(--font-mono); font-size:10px; line-height:1.4; padding:0 4px; border:1px solid var(--border); border-radius:3px; color:var(--subtle-foreground); }
+/* Menu rows pair the label with per-item controls and panel accessories. */
+.herdr-command-menu .herdr-command-row { display:flex; align-items:center; gap:2px; }
+.herdr-command-menu .herdr-command-row .herdr-command-label { flex:1 1 auto; display:flex; align-items:center; gap:6px; min-width:0; }
+.herdr-command-menu .herdr-command-row .herdr-command-mini { flex:none; width:auto; padding:6px 5px; font-size:11px; color:var(--subtle-foreground); }
+.herdr-command-menu .herdr-command-accessory { flex:none; display:inline-flex; align-items:center; max-width:4rem; max-height:1.25rem; overflow:hidden; }
+.herdr-command-menu-footer { border-top:1px solid var(--border-seam); margin-top:4px; padding-top:4px; }
 @media (pointer:coarse) { .herdr-commands button, .herdr-commands summary { min-height:44px; } }
 /* Native child-thread guide spans are decorative; indentation remains. */
 :root[data-herdr-theme] [data-sidebar-project-id] span[aria-hidden="true"].w-px.bg-border-hairline { display:none; }

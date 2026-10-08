@@ -27,7 +27,7 @@ Independent and unofficial.
 - **A readable thread tree.** Connected child-thread branches, clear selection, and colored activity indicators.
 - **Details when you want them.** Optional Git branch names beneath project-thread titles, including `main`.
 - **Eleven palette families.** Light and dark appearances, coordinated code highlighting, and a swatch picker in settings.
-- **A bundled font.** JetBrains Mono is bundled. No font service or network request required.
+- **A bundled font.** JetBrains Mono is bundled. No font service or network request required. Turn off **Monospace interface** in settings for system sans UI text; code stays monospace.
 
 BB still owns the editor, attachments, voice controls, menus, keyboard shortcuts,
 and thread navigation. This theme does not change agent behavior or add workspace
