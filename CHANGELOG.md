@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.1
 
 - Command bar works again on BB 0.47: reads sidebar items from the new navigation hook, so New thread and the menu show instead of BB's default list.
 

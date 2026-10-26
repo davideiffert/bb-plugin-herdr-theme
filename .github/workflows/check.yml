@@ -19,4 +19,4 @@ jobs:
       - run: node scripts/embed-font.mjs
       - run: npm run palettes
       - run: git diff --exit-code -- font.css themes palettes package.json design/palette-contrast.txt
-      - run: npm exec --yes --package=bb-app@0.43.0 -- bb plugin build
+      - run: npm exec --yes --package=bb-app@0.47.1 -- bb plugin build
